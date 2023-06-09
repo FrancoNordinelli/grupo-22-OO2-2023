@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title> Smart Parking</title>
+		<style>
+			#bloque {width: 100%}
+			#bloque .modificarsmartParking, #bloque .crearsmartParking{
+				display: inline-block;
+			}
+			
+			table, td, th{
+				border: 2px solid black;	
+				background-color: darkgrey;
+				text-align: center;
+			}
+
+			
+			.insertDiv{
+				background-color: blueviolet;
+				border: 2px solid black;
+				text-align:center;
+			}
+			.modificarDiv{
+				background-color: cyan;
+				border: 2px solid black;
+				text-align:center;
+			}
+			.tableDiv {
+				text-align:center;
+				width: 40%;
+				margin-left: 30%;
+				margin-top: 5px;
+			}		
+		</style>
+	</head>
+	
+	
+	<body>
+		<div id=bloque>
+			<div class="crearsmartParking" style="width: 48%;">
+				<div class="insertDiv">
+					<h4 style="text-align: center;">Crear nuevo smartParking</h4>
+					<form action="#" th:action="@{/sparking/}" th:object="${smartParking}" method="post">
+						<input type="text" th:field="*{nombreDispositivo}" placeholder="Nombre"/>
+                        <input type="text" th:field="*{descripcion}" placeholder="Descripción"/>
+                        <input type="text" th:field="*{codigoLugarEstacionamiento}" placeholder="Codigo estacionamiento"/>
+                        <button type="submit">Agregar</button>
+                    </form> 
+				</div>
+			</div>
+			
+			
+			<div class="modificarsmartParking" style="width: 50%">
+				<div class="modificarDiv">
+					<h4 style="text-align: center;">Cambiar estado de smartParking</h4>
+					<form action="#" th:action="@{/sparking/modificar}" th:object="${smartParking}" method="post">
+						<input type="text" th:field="*{id}" placeholder="ID"/><button type="submit">Baja/Alta</button>
+					</form>
+				</div>
+			</div>
+		</div>
+		
+		<div class="tableDiv">
+			<table>
+				<thead>	
+					<tr>
+						<th style="width: 15%;">ID</th>
+						<th style="width: 70%;">Nombre dispositivo</th>
+                        <th style="width: 70%;">Codigo de Estacionamiento</th>
+                        <th style="width: 70%;">Descripción</th>
+                      	<th style="width: 15%;">Estado dispositivo</th>
+                        <th style="width: 70%;">Ocupado</th>
+                        <th style="width: 70%;">Fecha de creación</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="sParking : ${smartParkingS}">
+						<td><span th:text="${sParking.id}"/></td>
+						<td><span th:text="${sParking.nombreDispositivo}"/></td>
+                        <td><span th:text="${sParking.codigoLugarEstacionamiento}"/></td>
+                        <td><span th:text="${sParking.descripcion}"/></td>
+                      	<td><span th:text="${sParking.estadoDispositivo}"/></td>
+                        <td><span th:text="${sParking.ocupado}"/></td>
+                        <td><span th:text="${sParking.createdAt}"/></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</body>
+</html>
