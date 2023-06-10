@@ -1,5 +1,9 @@
 package com.grupo22OO22023.entities;
 
+import java.time.LocalDateTime;
+
+import org.hibernate.annotations.CreationTimestamp;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -21,11 +25,18 @@ public class Evento {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idEvento;
-	
 	@Column(name="nombreEvento", nullable = false)
 	private String nombreEvento;
-	
+	@Column(name="instante", nullable = false)
+	@CreationTimestamp
+	private LocalDateTime createdAt;
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "evento_id", nullable = false)
 	private Dispositivo dispositivo;
+	
+
+	public Evento(String nombreEvento) {
+		super();
+		this.nombreEvento = nombreEvento;
+	}
 }
