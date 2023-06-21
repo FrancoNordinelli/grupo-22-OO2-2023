@@ -25,4 +25,6 @@ public class EventoController {
 		return mV;
 	}
 	
+	// TODO hacer toda la parte de eventos
+	// TODO que se agrege un evento cada 15 segundos
 }

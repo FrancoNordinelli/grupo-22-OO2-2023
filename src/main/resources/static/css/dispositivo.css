@@ -1,0 +1,43 @@
+body {
+  background-color: #9A9483;
+}
+
+table.tablaDispositivo {
+	border: 2px solid #645f4f;
+    background-color: #E5DCC3;
+	text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+	border-radius: 5px;
+	width: auto;
+	margin-top: 10px;
+}
+
+table.tablaDispositivo td,
+table.tablaDispositivo th {
+	border: 2px solid #645f4f;
+	padding: 3px 5px;
+}
+
+table.tablaDispositivo tbody td {
+	font-size: 12px;
+	font-weight: bold;
+	color: black;
+}
+
+table.tablaDispositivo thead {
+    background-color: #C7BEA2;
+	border-bottom: 2px solid #645f4f;
+}
+
+table.tablaDispositivo thead th {
+	font-size: 15px;
+	font-weight: bold;
+	color: black;
+	text-align: center;
+	border-left: 2px solid #645f4f;
+}
+
+table.tablaDispositivo thead th:first-child {
+	border-left: none;
+}

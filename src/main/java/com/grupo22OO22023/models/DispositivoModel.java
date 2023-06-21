@@ -12,18 +12,12 @@ import lombok.ToString;
 @NoArgsConstructor
 public abstract class DispositivoModel {
 	private int id;
-	private boolean estadoDispositivo=true;
+	private boolean estadoDispositivo;
 	private String nombreDispositivo;
 	private String descripcion;
 	private LocalDateTime updatedAt;
 	private LocalDateTime createdAt;
-
 	private Set<EventoModel> eventos;
-	
-	public DispositivoModel(boolean estadoDispositivo) {
-		super();
-		this.estadoDispositivo = estadoDispositivo;
-	}
 
 	public DispositivoModel(boolean estadoDispositivo, String nombreDispositivo, String descripcion,
 			LocalDateTime updatedAt, LocalDateTime createdAt) {
@@ -32,5 +26,6 @@ public abstract class DispositivoModel {
 		this.descripcion = descripcion;
 		this.updatedAt = updatedAt;
 		this.createdAt = createdAt;
+		this.estadoDispositivo = true;
 	}
 }

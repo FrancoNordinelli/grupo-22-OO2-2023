@@ -15,8 +15,7 @@ import lombok.ToString;
 public class SmartParking extends Dispositivo {
 	
 	@Column(name = "codigoLugarEstacionamiento", unique = true, nullable = false, updatable = false)
-	private String codigoLugarEstacionamiento;
-	
+	private String codigoLugarEstacionamiento;	
 	@Column(name = "ocupado", nullable = false, columnDefinition = "boolean default false")
 	private boolean ocupado;
 

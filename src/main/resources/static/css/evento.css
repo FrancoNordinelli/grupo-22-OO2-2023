@@ -1,0 +1,37 @@
+body {
+	background-color: #9A9483;
+}
+table.eventoTabla {
+  border: 2px solid #645f4f;
+  background-color: #E5DCC3;
+  width: 35%;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 15px;
+  border-radius: 5px;
+
+}
+table.eventoTabla td, table.eventoTabla th {
+  border: 1px solid #645f4f;
+  padding: 5px 2px;
+}
+table.eventoTabla tbody td {
+  font-size: 12px;
+  font-weight: bold;
+  color: black;
+}
+table.eventoTabla thead {
+  background: #C7BEA2;
+  border-bottom: 2px solid #645f4f;
+}
+table.eventoTabla thead th {
+  font-size: 15px;
+  font-weight: bold;
+  color: black;
+  text-align: center;
+  border-left: 2px solid #645f4f;
+}
+table.eventoTabla thead th:first-child {
+  border-left: none;
+}

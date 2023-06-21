@@ -23,7 +23,7 @@ public interface IEventoRepository extends JpaRepository<Evento, Serializable>{
 	public abstract List<Evento> findByCreatedAt(LocalDateTime createdAt);
 	
 	//ver si esto se puede hacer con el dispositivo en concreto, no con dispositivo general.
-	@Query("SELECT e FROM Evento e INNER JOIN FETCH e.dispositivo d ORDER BY e.idEvento")
+	@Query("SELECT e FROM Evento e INNER JOIN FETCH e.dispositivo d ORDER BY e.idEvento asc")
 	public abstract List<EventoModel> findAllEventosWithAttributes();
 	@Query("SELECT e FROM Evento e inner join fetch e.dispositivo d WHERE d.id = (:id) ORDER BY e.idEvento asc")
 	public abstract List<Evento> findByDispositivo(@Param("id") int idDispositivo);

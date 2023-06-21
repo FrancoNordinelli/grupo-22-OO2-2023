@@ -2,31 +2,26 @@ package com.grupo22OO22023.service.implementation;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.grupo22OO22023.entities.SmartParking;
-import com.grupo22OO22023.models.SmartParkingModel;
 import com.grupo22OO22023.repositories.ISmartParkingRepository;
 import com.grupo22OO22023.service.ISmartParkingService;
 
 @Service("SmartParking")
 public class SmartParkingService implements ISmartParkingService {
 
-	private ModelMapper modelMapper = new ModelMapper();
 	@Autowired
 	@Qualifier("smartParkingRepository")
 	private ISmartParkingRepository smartParkingRepository;
 	
-	
-	
 	@Override
-	public SmartParkingModel insertOrUpdate(SmartParkingModel smartParkingModel) {
-		SmartParking smartParking = smartParkingRepository.save(modelMapper.map(smartParkingModel, SmartParking.class));
-		return modelMapper.map(smartParking, SmartParkingModel.class);
+	public SmartParking insertOrUpdate(SmartParking smartParking) {
+		return smartParkingRepository.save(smartParking);
 	}
 	@Override
 	public boolean remove(int id) {
@@ -40,13 +35,16 @@ public class SmartParkingService implements ISmartParkingService {
 	}
 
 	@Override
-	public SmartParkingModel searchById(int id) {	
-		return smartParkingRepository.findById(id);
+	public Optional<SmartParking> findById(int id) {
+		return Optional.ofNullable(smartParkingRepository.findById(id));
 	}
 	@Override
-	public SmartParkingModel searchBynombreDispositivo(String nombreDispositivo) {
-		return modelMapper.map(smartParkingRepository.findByNombreDispositivo(nombreDispositivo), 
-				SmartParkingModel.class);
+	public Optional<SmartParking> findBynombreDispositivo(String nombreDispositivo) {
+		return smartParkingRepository.findByNombreDispositivo(nombreDispositivo);
+	}
+	@Override
+	public Optional<SmartParking> findByCodigoLugarEstacionamiento(String codigoLugarEstacionamiento) {	
+		return smartParkingRepository.findByCodigoLugarEstacionamiento(codigoLugarEstacionamiento);
 	}
 
 	@Override

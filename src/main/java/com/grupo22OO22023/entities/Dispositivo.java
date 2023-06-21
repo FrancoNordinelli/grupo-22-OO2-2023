@@ -31,27 +31,21 @@ public abstract class Dispositivo{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
 	@NotNull
 	@Column(name = "nombreDispositivo", nullable = false)
 	private String nombreDispositivo;
-	
 	@NotNull
 	@Column(name = "estadoDispositivo", nullable = false, columnDefinition = "boolean default true")
 	private boolean estadoDispositivo;
-	
 	@NotNull
 	@Column(name="descripcionDispositivo", nullable = false)
 	private String descripcion;
-	
 	@Column(name="updatedAt", nullable = false)
 	@UpdateTimestamp
 	private LocalDateTime updatedAt;
-	
-	@Column(name="createdAt", nullable = false)
+	@Column(name="createdAt", nullable = false, updatable = false)
 	@CreationTimestamp
 	private LocalDateTime createdAt;
-	
 	@OneToMany(mappedBy = "dispositivo", 
 			fetch = FetchType.LAZY)
 	@ToString.Exclude

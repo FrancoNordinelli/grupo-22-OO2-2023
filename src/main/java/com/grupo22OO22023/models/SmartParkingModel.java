@@ -12,8 +12,7 @@ import lombok.ToString;
 public class SmartParkingModel extends DispositivoModel{
 	
 	private String codigoLugarEstacionamiento;
-	private boolean ocupado;
-	
+	private boolean ocupado=false;
 	private Set<EventoModel> evento;
 
 	public SmartParkingModel(boolean estadoDispositivo, String codigoLugarEstacionamiento) {
