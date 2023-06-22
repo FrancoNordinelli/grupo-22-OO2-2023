@@ -9,14 +9,14 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.grupo22OO22023.entities.SPEvento;
 import com.grupo22OO22023.helpers.Rutas;
-import com.grupo22OO22023.service.IEventoService;
+import com.grupo22OO22023.service.ISPEventoService;
 
 @Controller
 @RequestMapping("/evento")
 public class EventoController {
 	@Autowired
-	@Qualifier("eventoService")
-	private IEventoService eventoService;
+	@Qualifier("SPEvento")
+	private ISPEventoService eventoService;
 	
 	@GetMapping("/")
 	public ModelAndView eventos() {

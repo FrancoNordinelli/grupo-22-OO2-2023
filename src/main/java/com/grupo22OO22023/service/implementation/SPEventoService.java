@@ -7,16 +7,18 @@ import java.util.stream.Collectors;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
 
 import com.grupo22OO22023.entities.SPEvento;
 import com.grupo22OO22023.models.SPEventoModel;
 import com.grupo22OO22023.repositories.ISPEventoRepository;
 import com.grupo22OO22023.service.ISPEventoService;
 
+@Service("SPEvento")
 public class SPEventoService implements ISPEventoService {
 	
 	@Autowired
-	@Qualifier("ISPEventoRepository")
+	@Qualifier("spEventoRepository")
 	private ISPEventoRepository spEventoRepository;
 	private ModelMapper modelMapper = new ModelMapper();
 	
