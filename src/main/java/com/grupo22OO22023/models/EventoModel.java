@@ -11,11 +11,16 @@ import lombok.ToString;
 
 @Getter @Setter @ToString
 @NoArgsConstructor 
-public class EventoModel {
+public abstract class EventoModel {
 	private int idEvento;
 	private String nombreEvento;
 	private LocalDateTime createdAt; 
-	
 	@ToString.Exclude
-	private Dispositivo dispositivo;
+	private Dispositivo dispositivo;	
+
+	public EventoModel(String nombreEvento, Dispositivo dispositivo) {
+		super();
+		this.nombreEvento = nombreEvento;
+		this.dispositivo = dispositivo;
+	}
 }

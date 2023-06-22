@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.grupo22OO22023.entities.SPEvento;
 import com.grupo22OO22023.helpers.Rutas;
 import com.grupo22OO22023.service.IEventoService;
 
@@ -22,5 +23,9 @@ public class EventoController {
 		ModelAndView mV = new ModelAndView(Rutas.visualizarEvento);
 		mV.addObject("eventos", eventoService.findAllEventosWithAttributes());
 		return mV;
+	}
+	
+	public boolean addEvento(SPEvento smartParkingEvento) {
+		
 	}
 }

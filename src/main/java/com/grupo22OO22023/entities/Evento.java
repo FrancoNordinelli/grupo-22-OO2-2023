@@ -20,7 +20,7 @@ import lombok.ToString;
 @Entity
 @Getter @Setter @ToString
 @NoArgsConstructor 
-public class Evento {
+public abstract class Evento {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -38,5 +38,11 @@ public class Evento {
 	public Evento(String nombreEvento) {
 		super();
 		this.nombreEvento = nombreEvento;
+	}
+	
+	public Evento(String nombreEvento, Dispositivo dispositivo) {
+		super();
+		this.nombreEvento = nombreEvento;
+		this.dispositivo = dispositivo;
 	}
 }
