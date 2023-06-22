@@ -15,4 +15,9 @@ public class SmartParkingDTO {
 	private String codigoLugarEstacionamiento;
 	private boolean ocupado;
 	private LocalDateTime createdAt;
+	
+	public boolean cambiarEstadoOcupado() {
+		this.setOcupado(!this.isOcupado());
+		return this.isOcupado();
+	}
 }

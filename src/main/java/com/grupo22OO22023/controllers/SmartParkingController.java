@@ -22,22 +22,16 @@ import org.springframework.web.servlet.ModelAndView;
 import com.grupo22OO22023.dto.SmartParkingDTO;
 import com.grupo22OO22023.entities.SmartParking;
 import com.grupo22OO22023.helpers.Rutas;
-import com.grupo22OO22023.service.IEventoService;
 import com.grupo22OO22023.service.ISmartParkingService;
 
 @RestController
 @RequestMapping("/sparking")
 public class SmartParkingController {
-	
-	@Autowired
-	@Qualifier("eventoService")
-	private IEventoService eventoService;
 	@Autowired
 	@Qualifier("SmartParking")
 	private ISmartParkingService smartParkService;
 	private ModelMapper modelMapper = new ModelMapper();
 
-	
 	
 	@GetMapping("/")
 	public ModelAndView administracionSmartParking() {
@@ -56,14 +50,15 @@ public class SmartParkingController {
 		if(sp == null) return new ResponseEntity<String>("El objeto no puede ser nulo.", 
 				HttpStatus.BAD_REQUEST);
 		
-		Optional<SmartParking> aux = smartParkService.findBynombreDispositivo
-				(sp.getNombreDispositivo());
+		Optional<SmartParking> aux = Optional.ofNullable(modelMapper.map(
+				smartParkService.findBynombreDispositivo(sp.getNombreDispositivo()), 
+				SmartParking.class)) ; 
 		
 		if(aux.isPresent()) return new ResponseEntity<String>("El objeto esta repetido.", 
 				HttpStatus.BAD_REQUEST);
 		
 		try {
-			smartParkService.insertOrUpdate(modelMapper.map(sp, SmartParking.class));
+			smartParkService.insertOrUpdate(sp);
 		} catch (Exception e) {
 			return new ResponseEntity<String>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
 		}
@@ -73,12 +68,15 @@ public class SmartParkingController {
 	@SuppressWarnings("rawtypes")
 	@PutMapping("/")
 	public ResponseEntity modificarSmartParking(@RequestBody SmartParkingDTO sp) {
-		Optional<SmartParking> aux = smartParkService.findById(sp.getId());
+		Optional<SmartParking> aux = Optional.ofNullable(modelMapper.map(
+				smartParkService.findById(sp.getId()), 
+				SmartParking.class));
+		
 		if(aux.isEmpty()) return new ResponseEntity<String>("No existe ese dispositivo en la base de datos.", 
 				HttpStatus.BAD_REQUEST);
 		
 		try {
-			smartParkService.insertOrUpdate(modelMapper.map(sp, SmartParking.class));
+			smartParkService.insertOrUpdate(sp);
 		} catch (Exception e) {
 			return new ResponseEntity<String>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
 		}
@@ -92,7 +90,9 @@ public class SmartParkingController {
 				"Error, ese ID es invalido",
 				HttpStatus.BAD_REQUEST);
 		
-		Optional<SmartParking> aux = smartParkService.findById(id);
+		Optional<SmartParking> aux = Optional.ofNullable(modelMapper.map(
+				smartParkService.findById(id)
+				,SmartParking.class)); 
 		
 		if(aux.isEmpty()) return new ResponseEntity<String>(
 				"Esa entrada no existe en la Base de datos.", 
@@ -115,7 +115,9 @@ public class SmartParkingController {
 				HttpStatus.BAD_REQUEST
 				);
 		
-		Optional<SmartParking> aux = smartParkService.findById(id);
+		Optional<SmartParking> aux = Optional.ofNullable(modelMapper.map(
+				smartParkService.findById(id), 
+				SmartParking.class)); 
 		
 		if(aux.isEmpty()) return new ResponseEntity<String>(
 				"Error: no existe en la base de datos.",

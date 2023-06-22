@@ -10,6 +10,8 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Inheritance;
+import jakarta.persistence.InheritanceType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import lombok.Getter;
@@ -20,8 +22,8 @@ import lombok.ToString;
 @Entity
 @Getter @Setter @ToString
 @NoArgsConstructor 
+@Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Evento {
-	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idEvento;
@@ -32,17 +34,21 @@ public abstract class Evento {
 	private LocalDateTime createdAt;
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "evento_id", nullable = false)
-	private Dispositivo dispositivo;
+	private SmartParking dispositivo;
 	
 
 	public Evento(String nombreEvento) {
 		super();
 		this.nombreEvento = nombreEvento;
 	}
-	
-	public Evento(String nombreEvento, Dispositivo dispositivo) {
+	public Evento(String nombreEvento, SmartParking dispositivo) {
 		super();
 		this.nombreEvento = nombreEvento;
+		this.dispositivo = dispositivo;
+	}
+	public Evento(LocalDateTime createdAt, SmartParking dispositivo) {
+		super();
+		this.createdAt = createdAt;
 		this.dispositivo = dispositivo;
 	}
 }

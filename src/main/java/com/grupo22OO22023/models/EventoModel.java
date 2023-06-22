@@ -2,7 +2,7 @@ package com.grupo22OO22023.models;
 
 import java.time.LocalDateTime;
 
-import com.grupo22OO22023.entities.Dispositivo;
+import com.grupo22OO22023.entities.SmartParking;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,11 +16,16 @@ public abstract class EventoModel {
 	private String nombreEvento;
 	private LocalDateTime createdAt; 
 	@ToString.Exclude
-	private Dispositivo dispositivo;	
+	private SmartParking dispositivo;	
 
-	public EventoModel(String nombreEvento, Dispositivo dispositivo) {
+	public EventoModel(String nombreEvento, SmartParking dispositivo) {
 		super();
 		this.nombreEvento = nombreEvento;
+		this.dispositivo = dispositivo;
+	}
+	public EventoModel(LocalDateTime createdAt, SmartParking dispositivo) {
+		super();
+		this.createdAt = createdAt;
 		this.dispositivo = dispositivo;
 	}
 }

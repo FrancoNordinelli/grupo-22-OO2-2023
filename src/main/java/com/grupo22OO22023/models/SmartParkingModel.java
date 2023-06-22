@@ -10,7 +10,6 @@ import lombok.ToString;
 @Getter @Setter 
 @NoArgsConstructor @ToString
 public class SmartParkingModel extends DispositivoModel{
-	
 	private String codigoLugarEstacionamiento;
 	private boolean ocupado=false;
 	private Set<EventoModel> evento;

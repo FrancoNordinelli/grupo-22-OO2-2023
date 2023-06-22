@@ -24,7 +24,6 @@ import lombok.ToString;
 @Table(name = "dispositivo") 
 @Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Dispositivo{
-	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	protected int id;

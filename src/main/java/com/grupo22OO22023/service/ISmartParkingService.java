@@ -4,21 +4,22 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
-import com.grupo22OO22023.entities.SmartParking;
+import com.grupo22OO22023.dto.SmartParkingDTO;
 
 public interface ISmartParkingService {
-	
-	public SmartParking insertOrUpdate(SmartParking smartParking);
+	public SmartParkingDTO insertOrUpdate(SmartParkingDTO smartParking);
 	public boolean remove(int id);
 	
-	public Optional<SmartParking> findById(int id);
-	public Optional<SmartParking> findBynombreDispositivo(String nombreDispositivo);
-	public Optional<SmartParking> findByCodigoLugarEstacionamiento(String codigoLugarEstacionamiento);
+	public Optional<SmartParkingDTO> findById(int id);
+	public Optional<SmartParkingDTO> findBynombreDispositivo(String nombreDispositivo);
+	public Optional<SmartParkingDTO> findByCodigoLugarEstacionamiento(String codigoLugarEstacionamiento);
 	
-	public List<SmartParking> getAll();
-	public List<SmartParking> searchByOcupado(boolean ocupado);
-	public List<SmartParking> searchByestadoDispositivo(boolean estadoDispositivo);
-	public List<SmartParking> serchBycreatedAt(LocalDateTime createdAt);
-	public List<SmartParking> serchByupdatedAt(LocalDateTime updatedAt);
+	public List<SmartParkingDTO> getAll();
+	public List<SmartParkingDTO> searchByOcupado(boolean ocupado);
+	public List<SmartParkingDTO> searchByestadoDispositivo(boolean estadoDispositivo);
+	public List<SmartParkingDTO> serchBycreatedAt(LocalDateTime createdAt);
+	public List<SmartParkingDTO> serchByupdatedAt(LocalDateTime updatedAt);
+	
+	public int countCantDispositivos();
 }
 

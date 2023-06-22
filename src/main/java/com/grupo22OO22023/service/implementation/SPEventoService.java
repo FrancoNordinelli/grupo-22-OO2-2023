@@ -16,7 +16,6 @@ import com.grupo22OO22023.service.ISPEventoService;
 
 @Service("SPEvento")
 public class SPEventoService implements ISPEventoService {
-	
 	@Autowired
 	@Qualifier("spEventoRepository")
 	private ISPEventoRepository spEventoRepository;
@@ -62,7 +61,12 @@ public class SPEventoService implements ISPEventoService {
 				.map(spEvento -> modelMapper.map(spEvento, SPEventoModel.class))
 				.collect(Collectors.toList());
 	}
-	
+	public List<SPEventoModel> findByNombreEventoAndDispositivo(String nombreEvento, int id) {
+		return spEventoRepository.findByNombreEventoAndDispositivo(nombreEvento, id)
+				.stream()
+				.map(spEvento -> modelMapper.map(spEvento, SPEventoModel.class))
+				.collect(Collectors.toList());
+	}
 	public List<SPEventoModel> findAllEventosWithAttributes(){
 		return spEventoRepository.findAllEventosWithAttributes().stream()
 				.map(spEvento -> modelMapper.map(spEvento, SPEventoModel.class))
@@ -74,11 +78,10 @@ public class SPEventoService implements ISPEventoService {
 				.map(spEvento -> modelMapper.map(spEvento, SPEventoModel.class))
 				.collect(Collectors.toList());	
 	}
-	@Override
-	public List<SPEventoModel> findByNombreEventoAndDispositivo(String nombreEvento, int idDispositivo) {
-		return spEventoRepository.findByNombreEventoAndDispositivo(nombreEvento, idDispositivo)
-				.stream()
-				.map(spEvento -> modelMapper.map(spEvento, SPEventoModel.class))
-				.collect(Collectors.toList());
+
+	public SPEventoModel findLastEventoByDispositivo(int id) {
+		return modelMapper.map(spEventoRepository.
+				findByIdDispositivoOrderedByIdDispositivoDESC(id).get(0), 
+				SPEventoModel.class);
 	}
 }

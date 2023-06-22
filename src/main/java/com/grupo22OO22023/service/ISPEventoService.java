@@ -9,14 +9,16 @@ public interface ISPEventoService {
 	public SPEventoModel insertOrUpdate(SPEventoModel sParkingEventoModel);
 	public boolean remove(int id);
 
-	public abstract SPEventoModel findByidEvento(int idEvento);
+	
+	public SPEventoModel findByidEvento(int idEvento);
 	
 	public List<SPEventoModel> getAll();
 	
-	public abstract List<SPEventoModel> findByNombreEvento(String nombreEvento);
-	public abstract List<SPEventoModel> findByCreatedAt(LocalDateTime createdAt);
+	public List<SPEventoModel> findByNombreEvento(String nombreEvento);
+	public List<SPEventoModel> findByCreatedAt(LocalDateTime createdAt);
+	public List<SPEventoModel> findByNombreEventoAndDispositivo(String nombreEvento, int id);
+	public List<SPEventoModel> findAllEventosWithAttributes();
+	public List<SPEventoModel> findByDispositivo(int idDispositivo);
 
-	public abstract List<SPEventoModel> findAllEventosWithAttributes();
-	public abstract List<SPEventoModel> findByDispositivo(int idDispositivo);
-	public abstract List<SPEventoModel> findByNombreEventoAndDispositivo(String nombreEvento, int idDispositivo);
+	public SPEventoModel findLastEventoByDispositivo(int id);
 }

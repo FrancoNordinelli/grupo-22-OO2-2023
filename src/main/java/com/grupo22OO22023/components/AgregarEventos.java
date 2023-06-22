@@ -5,9 +5,8 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class AgregarEventos {
-
-	@Scheduled(fixedDelay=5000)
+	
+	@Scheduled(fixedDelay=15000)
 	public void runJob() {
-		
 	}
 }

@@ -13,14 +13,14 @@ import lombok.ToString;
 @Getter @Setter @NoArgsConstructor @ToString(callSuper = true)
 @Table(name = "smartParking")
 public class SmartParking extends Dispositivo {
-	
 	@Column(name = "codigoLugarEstacionamiento", unique = true, nullable = false, updatable = false)
 	private String codigoLugarEstacionamiento;	
 	@Column(name = "ocupado", nullable = false, columnDefinition = "boolean default false")
 	private boolean ocupado;
 
 	public SmartParking(@NotNull String nombreDispositivo, @NotNull boolean estadoDispositivo,
-			@NotNull String descripcion, String codigoLugarEstacionamiento) {
+			@NotNull String descripcion, String codigoLugarEstacionamiento) 
+	{
 		super(nombreDispositivo, estadoDispositivo, descripcion);
 		this.codigoLugarEstacionamiento = codigoLugarEstacionamiento;
 		this.ocupado = false;
