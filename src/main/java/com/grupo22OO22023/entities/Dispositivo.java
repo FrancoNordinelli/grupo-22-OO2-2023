@@ -1,20 +1,17 @@
 package com.grupo22OO22023.entities;
 
 import java.time.LocalDateTime;
-import java.util.Set;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
@@ -30,26 +27,22 @@ public abstract class Dispositivo{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	protected int id;
 	@NotNull
 	@Column(name = "nombreDispositivo", nullable = false)
-	private String nombreDispositivo;
+	protected String nombreDispositivo;
 	@NotNull
 	@Column(name = "estadoDispositivo", nullable = false, columnDefinition = "boolean default true")
-	private boolean estadoDispositivo;
+	protected boolean estadoDispositivo;
 	@NotNull
 	@Column(name="descripcionDispositivo", nullable = false)
-	private String descripcion;
+	protected String descripcion;
 	@Column(name="updatedAt", nullable = false)
 	@UpdateTimestamp
-	private LocalDateTime updatedAt;
+	protected LocalDateTime updatedAt;
 	@Column(name="createdAt", nullable = false, updatable = false)
 	@CreationTimestamp
-	private LocalDateTime createdAt;
-	@OneToMany(mappedBy = "dispositivo", 
-			fetch = FetchType.LAZY)
-	@ToString.Exclude
-	private Set<Evento> eventos;
+	protected LocalDateTime createdAt;
 
 	public Dispositivo(@NotNull String nombreDispositivo, @NotNull boolean estadoDispositivo,
 			@NotNull String descripcion) {

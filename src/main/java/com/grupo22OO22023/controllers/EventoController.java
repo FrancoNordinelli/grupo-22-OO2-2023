@@ -13,7 +13,6 @@ import com.grupo22OO22023.service.IEventoService;
 @Controller
 @RequestMapping("/evento")
 public class EventoController {
-	
 	@Autowired
 	@Qualifier("eventoService")
 	private IEventoService eventoService;
@@ -24,7 +23,4 @@ public class EventoController {
 		mV.addObject("eventos", eventoService.findAllEventosWithAttributes());
 		return mV;
 	}
-	
-	// TODO hacer toda la parte de eventos
-	// TODO que se agrege un evento cada 15 segundos
 }

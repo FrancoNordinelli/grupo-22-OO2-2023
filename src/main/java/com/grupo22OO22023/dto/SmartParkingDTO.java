@@ -10,9 +10,9 @@ import lombok.Setter;
 public class SmartParkingDTO {
 	private int id;
 	private String nombreDispositivo;
+	private boolean estadoDispositivo;
 	private String descripcion;
 	private String codigoLugarEstacionamiento;
-	private boolean estadoDispositivo;
 	private boolean ocupado;
 	private LocalDateTime createdAt;
 }
