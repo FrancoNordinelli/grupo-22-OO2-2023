@@ -33,7 +33,7 @@ public abstract class Evento {
 	@CreationTimestamp
 	private LocalDateTime createdAt;
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "evento_id", nullable = false)
+	@JoinColumn(name = "dispositivoID", nullable = false)
 	private SmartParking dispositivo;
 	
 

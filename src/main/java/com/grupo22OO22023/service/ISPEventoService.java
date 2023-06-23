@@ -17,7 +17,7 @@ public interface ISPEventoService {
 	public List<SPEventoModel> findByNombreEvento(String nombreEvento);
 	public List<SPEventoModel> findByCreatedAt(LocalDateTime createdAt);
 	public List<SPEventoModel> findByNombreEventoAndDispositivo(String nombreEvento, int id);
-	public List<SPEventoModel> findAllEventosWithAttributes();
+	public List<SPEventoModel> findAllEventosWithDependencies();
 	public List<SPEventoModel> findByDispositivo(int idDispositivo);
 
 	public SPEventoModel findLastEventoByDispositivo(int id);

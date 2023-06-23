@@ -67,8 +67,8 @@ public class SPEventoService implements ISPEventoService {
 				.map(spEvento -> modelMapper.map(spEvento, SPEventoModel.class))
 				.collect(Collectors.toList());
 	}
-	public List<SPEventoModel> findAllEventosWithAttributes(){
-		return spEventoRepository.findAllEventosWithAttributes().stream()
+	public List<SPEventoModel> findAllEventosWithDependencies(){
+		return spEventoRepository.findAllEventosWithDependencies().stream()
 				.map(spEvento -> modelMapper.map(spEvento, SPEventoModel.class))
 				.collect(Collectors.toList());
 	}

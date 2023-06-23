@@ -22,7 +22,7 @@ public interface ISPEventoRepository extends JpaRepository<SPEvento, Serializabl
 	public abstract List<SPEvento> findByCreatedAt(LocalDateTime createdAt);
 	
 	@Query("SELECT spe FROM SPEvento spe INNER JOIN FETCH spe.dispositivo d ORDER BY spe.idEvento asc")
-	public abstract List<SPEvento> findAllEventosWithAttributes();
+	public abstract List<SPEvento> findAllEventosWithDependencies();
 	@Query("SELECT spe FROM SPEvento spe inner join fetch spe.dispositivo d WHERE d.id = (:id) ORDER BY spe.idEvento asc")
 	public abstract List<SPEvento> findByDispositivo(@Param("id") int idDispositivo);
 	

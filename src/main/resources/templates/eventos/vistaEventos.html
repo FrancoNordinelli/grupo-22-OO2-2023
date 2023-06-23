@@ -18,10 +18,10 @@
 
 		<tbody>
 			<tr th:each="evento : ${eventos}">
-				<td><span th:text="${idEvento}"/></td>
-				<td><span th:text="${nombreEvento}"/></td>
-				<td><span th:text="${createdAt}"/></td>
-				<td><span th:text="${dispositivo.id}"/></td>
+				<td><span th:text="${evento.idEvento}"/></td>
+				<td><span th:text="${evento.nombreEvento}"/></td>
+				<td><span th:text="${evento.createdAt}"/></td>
+				<td><span th:text="${evento.dispositivo.nombreDispositivo}"/></td>
 			</tr>
 		</tbody>
 	</table>

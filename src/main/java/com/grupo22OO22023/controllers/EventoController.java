@@ -20,7 +20,7 @@ public class EventoController {
 	@GetMapping("/")
 	public ModelAndView eventos() {
 		ModelAndView mV = new ModelAndView(Rutas.visualizarEvento);
-		mV.addObject("eventos", eventoService.findAllEventosWithAttributes());
+		mV.addObject("eventos", eventoService.findAllEventosWithDependencies());
 		return mV;
 	}
 }
