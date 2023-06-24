@@ -3,6 +3,8 @@ package repositories;
 import java.io.Serializable;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import entities.User;
@@ -10,4 +12,6 @@ import entities.User;
 @Repository("userRepository")
 public interface IUserRepository extends JpaRepository<User, Serializable>    {
 
+//	@Query("SELECT u FROM User INER JOIN FETCH u.userRoles WHERE u.username = ( : username )")
+	public abstract User findByUsernameAndFetchEagerly(@Param("username") String username);
 }
