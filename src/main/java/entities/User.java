@@ -25,11 +25,14 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id_user;
 	
-	@Column
+	@Column(name="username", unique=true, nullable=false, length=45)
 	private String username;
 	
-	@Column
+	@Column(name="password", nullable=false, length=60)
 	private String password;
+	
+	@Column(name="enabled")
+	private boolean enabled;
 	
 	@OneToMany(fetch=FetchType.LAZY, mappedBy="user")
 	private Set<UserRole> userRoles = new HashSet<>();

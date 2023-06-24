@@ -31,11 +31,12 @@ public class UserService implements UserDetailsService {
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		entities.User user  = userRepository.findByUsernameAndFetchEagerly(username);
-		return null;
+		return buildUser(user, buildGrantedAuthorities(user.getUserRoles()));
 	}
 	
-	private User buildUser(User user, List<GrantedAuthority> grantedAuthorities) {
-		return new User(user.getUsername(), user.getPassword(), true, true, true, true, grantedAuthorities);
+
+	private User buildUser(entities.User user, List<GrantedAuthority> grantedAuthorities) {
+		return new User(user.getUsername(), user.getPassword(), user.isEnabled(), true, true, true, grantedAuthorities);
 	}
 
 	private List<GrantedAuthority> buildGrantedAuthorities(Set<UserRole> userRoles) {

@@ -8,7 +8,12 @@ spring:
   jpa:
     show-sql: true
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
     
     properties:
       dialect: org.hibernate.dialect.MySQLDialect
+
+  thymeleaf:
+    cache: false
+    
+  

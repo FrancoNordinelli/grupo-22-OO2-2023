@@ -27,18 +27,18 @@ public class SecurityConfig {
 		auth.userDetailsService(userService).passwordEncoder(new BCryptPasswordEncoder());
 	}
 
+	@SuppressWarnings("removal")
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-		http.authorizeHttpRequests()
-				.requestMatchers("/css/*", "/imgs/*", "/js/*", "/vendor/bootstrap/css/*",
-						"/vendor/jquery/*", "/vendor/bootstrap/js/*").permitAll()
-				.anyRequest().authenticated()
-			.and()
-				.formLogin().loginPage("/login").loginProcessingUrl("/loginprocess")
-				.usernameParameter("username").passwordParameter("password")
-				.defaultSuccessUrl("/loginsuccess").permitAll()
-			.and()
-				.logout().logoutUrl("/logout").logoutSuccessUrl("/logout").permitAll();
+        http.authorizeHttpRequests()
+                .requestMatchers("/css/*", "/imgs/*", "/js/*", "/vendor/bootstrap/css/*",
+                        "/vendor/jquery/*", "/vendor/bootstrap/js/*").permitAll()
+                .anyRequest().authenticated()
+                .and()
+                .formLogin(login -> login.loginPage("/login").loginProcessingUrl("/loginprocess")
+                        .usernameParameter("username").passwordParameter("password")
+                        .defaultSuccessUrl("/loginsuccess").permitAll())
+                .logout(logout -> logout.logoutUrl("/logout").logoutSuccessUrl("/logout").permitAll());
 		return http.build();
 	}
 

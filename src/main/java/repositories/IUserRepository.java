@@ -12,6 +12,6 @@ import entities.User;
 @Repository("userRepository")
 public interface IUserRepository extends JpaRepository<User, Serializable>    {
 
-//	@Query("SELECT u FROM User INER JOIN FETCH u.userRoles WHERE u.username = ( : username )")
+	@Query("SELECT u FROM User INER JOIN FETCH u.userRoles WHERE u.username = ( : username )")
 	public abstract User findByUsernameAndFetchEagerly(@Param("username") String username);
 }
