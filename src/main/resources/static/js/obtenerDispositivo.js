@@ -26,7 +26,6 @@ function obtenerDispositivo(){
 
 	}).catch((err) => console.log(err))
 }
-
 window.onload = function(){
 	obtenerDispositivo();
-} 
+}

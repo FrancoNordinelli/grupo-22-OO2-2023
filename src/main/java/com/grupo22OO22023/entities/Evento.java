@@ -3,7 +3,10 @@ package com.grupo22OO22023.entities;
 import java.time.LocalDateTime;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -32,8 +35,9 @@ public abstract class Evento {
 	@Column(name="instante", nullable = false)
 	@CreationTimestamp
 	private LocalDateTime createdAt;
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "dispositivoID", nullable = false)
+	@OnDelete(action = OnDeleteAction.CASCADE)
 	private SmartParking dispositivo;
 	
 

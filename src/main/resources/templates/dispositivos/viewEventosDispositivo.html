@@ -6,11 +6,6 @@
 	<link rel="stylesheet" type="text/css" th:href="@{/css/evento.css}"/>
 	<link rel="stylesheet" type="text/css" th:href="@{/css/enlace.css}"/>
 	<link rel="stylesheet" type="text/css" th:href="@{/css/redondeo.css}"/>
-	<script type="text/javascript" th:src="@{/js/objetos/objetos.js}"></script>
-	<script type="text/javascript" th:src="@{/js/obtenerDispositivo.js}"></script>
-	<script type="text/javascript" th:src="@{/js/objetos/funciones.js}"></script>
-	<script type="text/javascript" th:src="@{/js/administrarDispositivo.js}"></script>
-
 </head>
 <body>
 	<div>
@@ -33,15 +28,14 @@
 		
 		<div id="redondeo">
 			<form>
-				<input type="text" id="nombre" placeholder="Nombre dispositivo"/>
-				<input type="text" id="descripcion" placeholder="Descripcion"/>
+				<input type="text" id="nombre" placeholder="Nombre dispositivo" required/>
+				<input type="text" id="descripcion" placeholder="Descripcion" required/>
 				Estado:<input type="radio" name="estado" value="true" checked="checked">Activado</input>
 				<input type="radio" name="estado" value="false">Desactivado</input>
 				
 			</form>
-			
-			<input type="button" value="Modificar" id="botonModificar" onclick="modificarDispositivo()"/>
-			<input type="button" value="Eliminar" id="botonEliminar" onclick="eliminarDispositivo()"/>
+      		<input type="button" value="Modificar" id="botonModificar"/>
+			<input type="button" value="Eliminar" id="botonEliminar"/>
 		</div>
 		
 	</div>
@@ -67,5 +61,9 @@
 	<div class="urlVolver">
 		<a href="http://localhost:8080/sparking/">Volver</a>
 	</div>
+	<script type="text/javascript" th:src="@{/js/objetos/objetos.js}"></script>
+	<script type="text/javascript" th:src="@{/js/obtenerDispositivo.js}"></script>
+	<script type="text/javascript" th:src="@{/js/objetos/funciones.js}"></script>
+	<script type="text/javascript" th:src="@{/js/administrarDispositivo.js}"></script>
 </body>
 </html>

@@ -41,3 +41,8 @@ table.tablaDispositivo thead th {
 table.tablaDispositivo thead th:first-child {
 	border-left: none;
 }
+
+input:invalid{
+  border-color: #900;
+  background-color: #FDD;
+}

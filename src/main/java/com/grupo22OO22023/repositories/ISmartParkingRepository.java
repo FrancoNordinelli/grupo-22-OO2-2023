@@ -7,6 +7,7 @@ import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+//import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.grupo22OO22023.entities.SmartParking;
@@ -25,4 +26,7 @@ public interface ISmartParkingRepository extends JpaRepository<SmartParking, Ser
 	
 	@Query("SELECT COUNT(sp.id) FROM SmartParking sp")
 	public abstract int countCantDispositivos();
+
+	//@Query("DELETE FROM SmartParking sp INNER JOIN FETCH SPEvento spe WHERE sp=(:id)")
+	//public abstract void deleteDispositivoYEventos(@Param("id") int id);
 }
