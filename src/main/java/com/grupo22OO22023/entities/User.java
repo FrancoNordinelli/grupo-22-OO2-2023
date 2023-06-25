@@ -1,4 +1,4 @@
-package entities;
+package com.grupo22OO22023.entities;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "usuario")
+@Table(name = "user")
 @NoArgsConstructor
 @Getter @Setter
 public class User {

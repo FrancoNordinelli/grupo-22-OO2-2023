@@ -5,7 +5,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import helpers.ViewRouteHelper;
+import com.grupo22OO22023.helpers.ViewRouteHelper;
 
 
 @Controller
@@ -15,6 +15,7 @@ public class UserController {
 	public String login(Model model,
 						@RequestParam(name="error",required=false) String error,
 						@RequestParam(name="logout", required=false) String logout) {
+		System.out.println("EN LOGIN!!!!");
 		model.addAttribute("error", error);
 		model.addAttribute("logout", logout);
 		return ViewRouteHelper.USER_LOGIN;

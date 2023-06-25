@@ -1,4 +1,4 @@
-package helpers;
+package com.grupo22OO22023.helpers;
 
 public class ViewRouteHelper {
 

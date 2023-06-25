@@ -1,4 +1,4 @@
-package services;
+package com.grupo22OO22023.services;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -18,8 +18,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import entities.UserRole;
-import repositories.IUserRepository;
+import com.grupo22OO22023.entities.UserRole;
+import com.grupo22OO22023.repositories.IUserRepository;
 
 @Service("userService")
 public class UserService implements UserDetailsService {
@@ -30,12 +30,12 @@ public class UserService implements UserDetailsService {
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		entities.User user  = userRepository.findByUsernameAndFetchEagerly(username);
+		com.grupo22OO22023.entities.User user  = userRepository.findByUsernameAndFetchEagerly(username);
 		return buildUser(user, buildGrantedAuthorities(user.getUserRoles()));
 	}
 	
 
-	private User buildUser(entities.User user, List<GrantedAuthority> grantedAuthorities) {
+	private User buildUser(com.grupo22OO22023.entities.User user, List<GrantedAuthority> grantedAuthorities) {
 		return new User(user.getUsername(), user.getPassword(), user.isEnabled(), true, true, true, grantedAuthorities);
 	}
 

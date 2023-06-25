@@ -1,4 +1,6 @@
-package entities;
+package com.grupo22OO22023.entities;
+
+
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -31,5 +33,11 @@ public class UserRole {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_user", nullable = false)
 	private User user;
+	
+	public UserRole(int id, User user, String role) {
+		this.id = id;
+		this.user = user;
+		this.role = role;
+	}
 
 }
