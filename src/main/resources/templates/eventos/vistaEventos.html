@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Eventos de los dispositivos</title>
+	<link rel="stylesheet" type="text/css" th:href="@{/css/evento.css}"/>
+</head>
+  
+<body>
+	<table class="eventoTabla">
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>Nombre</th>
+				<th>Momento</th>
+				<th>id Dispositivo</th>
+			</tr>
+		</thead>	
+
+		<tbody>
+			<tr th:each="evento : ${eventos}">
+				<td><span th:text="${evento.idEvento}"/></td>
+				<td><span th:text="${evento.nombreEvento}"/></td>
+				<td><span th:text="${evento.createdAt}"/></td>
+				<td><span th:text="${evento.dispositivo.nombreDispositivo}"/></td>
+			</tr>
+		</tbody>
+	</table>
+</body>
+</html>
