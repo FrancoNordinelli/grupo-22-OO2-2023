@@ -1,7 +1,11 @@
 package com.grupo22OO22023.entities;
 
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
+
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -34,15 +38,32 @@ public class User {
 	@Column(name="enabled")
 	private boolean enabled;
 	
-	@OneToMany(fetch=FetchType.LAZY, mappedBy="user")
-	private Set<UserRole> userRoles = new HashSet<>();
+	@Column(name="createdat")
+	@CreationTimestamp
+	private LocalDateTime createdAt;
 
-	public User(String username, String password, Set<UserRole> userRoles) {
+	@Column(name="updatedat")
+	@UpdateTimestamp
+	private LocalDateTime updatedAt;
+	
+	@OneToMany(fetch=FetchType.LAZY, mappedBy="user")
+	private Set<UserRole> userRoles = new HashSet<UserRole>();
+	
+	public User(String username, String password, boolean enabled) {
+		this.username = username;
+		this.password = password;
+		this.enabled = enabled;
+	}
+
+	public User(String username, String password, boolean enabled, Set<UserRole> userRoles) {
 		super();
 		this.username = username;
 		this.password = password;
+		this.enabled = enabled;
 		this.userRoles = userRoles;
 	}
+
+	
 	
 	
 	

@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,9 +20,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.security.core.userdetails.User;
 
 import com.grupo22OO22023.dto.SmartParkingDTO;
 import com.grupo22OO22023.entities.SmartParking;
+
 import com.grupo22OO22023.helpers.Rutas;
 import com.grupo22OO22023.service.ISmartParkingService;
 
@@ -33,21 +37,28 @@ public class SmartParkingController {
 	private ModelMapper modelMapper = new ModelMapper();
 
 	
+	
 	@GetMapping("/")
 	public ModelAndView administracionSmartParking() {
 		ModelAndView mV = new ModelAndView(Rutas.administracionDispositivos);
+		
 		return mV;
 	}
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@GetMapping("/eventos/{id}")
 	public ModelAndView eventosDeDispositivo(@PathVariable("id") int id) {
-		ModelAndView mV = new ModelAndView(Rutas.visualizarEventosDeDispositivo);		
+		ModelAndView mV = new ModelAndView(Rutas.visualizarEventosDeDispositivo);
+		User user = (org.springframework.security.core.userdetails.User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		mV.addObject("username", user.getUsername());
+
 		return mV;
 	}
 	
-	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@PostMapping("/")
 	public ResponseEntity crearSmartParking(@RequestBody SmartParkingDTO sp) {
+		
 		if(sp == null) return new ResponseEntity<String>("El objeto no puede ser nulo.", 
 				HttpStatus.BAD_REQUEST);
 		

@@ -8,5 +8,5 @@ function algo(){
 	let nDis = new Dispositivo(nombreDis.value, descripcion.value, codigo.value); 
 	
 	postServer('http://localhost:8080/sparking/', nDis);
-	location.reload();	
+	//location.reload();	
 };

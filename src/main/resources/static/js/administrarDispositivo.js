@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	const estadoDispositivo = document.getElementById('estado');
 	
 	console.log(estadoDispositivo);
-	/*
+	
 	botonMultiple.id='botonMultiple';
 	botonMultiple.type='button';
 	if(estadoDispositivo.textContent){
@@ -92,7 +92,7 @@ document.addEventListener('DOMContentLoaded', () => {
 				console.log('Error, la descripcion es necesaria.');
 			}
 		}
-	})*/
+	})
 })
 
 
