@@ -13,7 +13,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import com.grupo22OO22023.dto.SmartParkingDTO;
-import com.grupo22OO22023.entities.SmartParking;
+import com.grupo22OO22023.entities.Dispositivo;
 import com.grupo22OO22023.models.SPEventoModel;
 import com.grupo22OO22023.service.ISPEventoService;
 import com.grupo22OO22023.service.ISmartParkingService;
@@ -35,46 +35,36 @@ public class AgregarEventos {
 		if(listaDispo.size() > 0) {
 			LocalDateTime fechaHora = LocalDateTime.now();
 			int idDispositivo = (int) Math.random()*listaDispo.size();
-			SmartParking dispo = modelMapper.map(listaDispo.get(idDispositivo), SmartParking.class);
-			SPEventoModel evento = new SPEventoModel(fechaHora, dispo);
 			
-			Optional<SmartParkingDTO> aux = Optional.ofNullable(modelMapper.map(
-					smartParkService.findById(evento.getDispositivo().getId()),
-					SmartParkingDTO.class));
+			Optional<SmartParkingDTO> aux = Optional.ofNullable(listaDispo.get(idDispositivo));
 			
-			if(aux.isEmpty()) throw new Exception("Error, dispositivo desconocido.");
+			if(aux.isEmpty()) throw new Exception("Error, el dispositivo no existe.");
+			if(!aux.get().isEstadoDispositivo()) throw new Exception("Error, ese dispositivo esta desactivado.");
 			
-			if(aux.get().isEstadoDispositivo()) {
-				evento.setNombreEvento("Lugar estacionamiento " 
-						+ evento.getDispositivo().getNombreDispositivo() 
+			SPEventoModel SPEvento = new SPEventoModel(fechaHora, 
+					modelMapper.map(aux.get(), Dispositivo.class)); 
+			
+			if(aux.get().isOcupado()) {
+				SPEvento.setNombreEvento("Lugar estacionamiento " 
+						+ SPEvento.getDispositivo().getNombreDispositivo() 
 						+ " fue desocupado.");
 				
-				evento.setHorasOcupado(HOURS.between(
+				SPEvento.setHorasOcupado(HOURS.between(
 						eventoService.findLastEventoByDispositivo(aux.get().getId()).getCreatedAt(), 
 						LocalDateTime.now()));
+				aux.get().aumentarVecesOcupado();
 			} else {
-				evento.setNombreEvento("Lugar estacionamiento " 
-						+ evento.getDispositivo().getNombreDispositivo() 
+				SPEvento.setNombreEvento("Lugar estacionamiento " 
+						+ SPEvento.getDispositivo().getNombreDispositivo() 
 						+ " fue ocupado.");
-				evento.setHorasOcupado(-1);
+				SPEvento.setHorasOcupado(0);
 			}
 			
 			aux.get().cambiarEstadoOcupado();
 			
-			try {
-				smartParkService.insertOrUpdate(aux.get());
-			} catch(Exception e) {
-				System.out.println("Error al actualizar el dispositivo: " + e.toString());
-			}
-	
-			try {
-				eventoService.insertOrUpdate(evento);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		} else {
-			System.out.println("ERROR --->>>" + listaDispo.size());
+			eventoService.insertOrUpdate(modelMapper.map(SPEvento, SPEventoModel.class));
+			smartParkService.insertOrUpdate(modelMapper.map(aux.get(), SmartParkingDTO.class));
+			
 		}
-		System.out.println("Hecho");
 	}
 }

@@ -91,5 +91,5 @@ public class SmartParkingService implements ISmartParkingService {
 
 	public int countCantDispositivos() {
 		return smartParkingRepository.countCantDispositivos();
-	}
+	}	
 }

@@ -1,13 +1,10 @@
 package com.grupo22OO22023.entities;
 
 import java.time.LocalDateTime;
-import java.util.HashSet;
-import java.util.Set;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -15,16 +12,14 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 
 @Entity
-@Getter @Setter @NoArgsConstructor @ToString
+@Getter @Setter @NoArgsConstructor
 @Table(name = "dispositivo") 
 @Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Dispositivo{
@@ -47,10 +42,6 @@ public abstract class Dispositivo{
 	@CreationTimestamp
 	protected LocalDateTime createdAt;	
 	
-	@OneToMany(mappedBy = "dispositivo", 
-			cascade = CascadeType.REMOVE,
-			orphanRemoval = true)
-	private Set<Evento> eventos = new HashSet<Evento>();
 	
 	public Dispositivo(@NotNull String nombreDispositivo, @NotNull boolean estadoDispositivo,
 			@NotNull String descripcion) {

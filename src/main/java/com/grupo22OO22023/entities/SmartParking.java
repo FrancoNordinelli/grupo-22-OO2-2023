@@ -17,7 +17,9 @@ public class SmartParking extends Dispositivo {
 	private String codigoLugarEstacionamiento;	
 	@Column(name = "ocupado", nullable = false, columnDefinition = "boolean default false")
 	private boolean ocupado;
-
+	@Column(name = "totalVecesOcupado")
+	private int totalVecesOcupado=0;
+	
 	public SmartParking(@NotNull String nombreDispositivo, @NotNull boolean estadoDispositivo,
 			@NotNull String descripcion, String codigoLugarEstacionamiento) 
 	{

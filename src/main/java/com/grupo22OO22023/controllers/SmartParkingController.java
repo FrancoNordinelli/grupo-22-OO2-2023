@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -56,7 +55,6 @@ public class SmartParkingController {
 		
 		if(aux.isPresent()) return new ResponseEntity<String>("El objeto esta repetido.", 
 				HttpStatus.BAD_REQUEST);
-		
 		try {
 			smartParkService.insertOrUpdate(sp);
 		} catch (Exception e) {
@@ -84,29 +82,40 @@ public class SmartParkingController {
 		return new ResponseEntity<SmartParkingDTO>(sp, HttpStatus.OK);
 	}
 	@SuppressWarnings("rawtypes")
-	@DeleteMapping("/")
+	@PutMapping("/desactivar")
 	public ResponseEntity eliminarSmartParking(@RequestBody int id) {
 		if(id <= 0) return new ResponseEntity<String>(
 				"Error, ese ID es invalido",
 				HttpStatus.BAD_REQUEST);
 		
-		Optional<SmartParking> aux = Optional.ofNullable(modelMapper.map(
-				smartParkService.findById(id)
-				,SmartParking.class)); 
+		Optional<SmartParkingDTO> aux = smartParkService.findById(id); 
 		
 		if(aux.isEmpty()) return new ResponseEntity<String>(
 				"Esa entrada no existe en la Base de datos.", 
 				HttpStatus.NOT_FOUND);
 		
-		try {
-			smartParkService.remove(aux.get().getId());
-		} catch (Exception e) {
-			return new ResponseEntity<String>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
-		}
-		
-		return new ResponseEntity<String>("Entrada eliminada.", HttpStatus.OK);
+		aux.get().setEstadoDispositivo(false);
+		smartParkService.insertOrUpdate(aux.get());
+		return new ResponseEntity<String>("Entrada Desactivada.", HttpStatus.OK);
 	}
-
+	@SuppressWarnings("rawtypes")
+	@PutMapping("/activar")
+	public ResponseEntity activarSmartParking(@RequestBody int id) {
+		if(id <= 0) return new ResponseEntity<String>(
+				"Error, ese ID es invalido",
+				HttpStatus.BAD_REQUEST);
+		
+		Optional<SmartParkingDTO> aux = smartParkService.findById(id); 
+		
+		if(aux.isEmpty()) return new ResponseEntity<String>(
+				"Esa entrada no existe en la Base de datos.", 
+				HttpStatus.NOT_FOUND);
+		
+		aux.get().setEstadoDispositivo(true);
+		smartParkService.insertOrUpdate(aux.get());
+		return new ResponseEntity<String>("Entrada Reactivada.", HttpStatus.OK);
+	}
+	
 	@SuppressWarnings("rawtypes")
 	@GetMapping("/get/{id}")
 	public ResponseEntity getDispostivo(@PathVariable("id") int id) {

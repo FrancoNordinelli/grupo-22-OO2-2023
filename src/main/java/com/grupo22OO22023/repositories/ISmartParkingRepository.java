@@ -26,7 +26,4 @@ public interface ISmartParkingRepository extends JpaRepository<SmartParking, Ser
 	
 	@Query("SELECT COUNT(sp.id) FROM SmartParking sp")
 	public abstract int countCantDispositivos();
-
-	//@Query("DELETE FROM SmartParking sp INNER JOIN FETCH SPEvento spe WHERE sp=(:id)")
-	//public abstract void deleteDispositivoYEventos(@Param("id") int id);
 }

@@ -1,7 +1,6 @@
 package com.grupo22OO22023.models;
 
 import java.time.LocalDateTime;
-import java.util.Set;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,7 +16,6 @@ public abstract class DispositivoModel {
 	private String descripcion;
 	private LocalDateTime updatedAt;
 	private LocalDateTime createdAt;
-	private Set<EventoModel> eventos;
 
 	public DispositivoModel(boolean estadoDispositivo, String nombreDispositivo, String descripcion,
 			LocalDateTime updatedAt, LocalDateTime createdAt) {

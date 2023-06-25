@@ -3,8 +3,6 @@ package com.grupo22OO22023.entities;
 import java.time.LocalDateTime;
 
 import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -20,10 +18,9 @@ import jakarta.persistence.ManyToOne;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 
 @Entity
-@Getter @Setter @ToString
+@Getter @Setter
 @NoArgsConstructor 
 @Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Evento {
@@ -37,7 +34,6 @@ public abstract class Evento {
 	private LocalDateTime createdAt;
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "dispositivoID", nullable = false)
-	@OnDelete(action = OnDeleteAction.CASCADE)
 	private SmartParking dispositivo;
 	
 

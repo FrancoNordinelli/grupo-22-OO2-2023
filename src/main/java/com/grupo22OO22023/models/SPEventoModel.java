@@ -19,4 +19,5 @@ public class SPEventoModel extends EventoModel{
 	public SPEventoModel(LocalDateTime createdAt, Dispositivo dispositivo) {
 		super(createdAt, dispositivo);
 	}
+	
 }
