@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -19,149 +20,98 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 import org.springframework.security.core.userdetails.User;
+import org.springframework.stereotype.Controller;
 
-import com.grupo22OO22023.dto.SmartParkingDTO;
 import com.grupo22OO22023.entities.SmartParking;
 
-import com.grupo22OO22023.helpers.Rutas;
+import com.grupo22OO22023.helpers.ViewRouteHelper;
+import com.grupo22OO22023.models.SmartParkingModel;
+import com.grupo22OO22023.repositories.ISPEventoRepository;
+import com.grupo22OO22023.services.ISPEventoService;
 import com.grupo22OO22023.services.ISmartParkingService;
 
-@RestController
-@PreAuthorize("hasRole('ROLE_USER')")
+@Controller
 @RequestMapping("/sparking")
 public class SmartParkingController {
 	@Autowired
 	@Qualifier("SmartParking")
 	private ISmartParkingService smartParkService;
+	@Autowired
+	@Qualifier("SPEvento")
+	private ISPEventoService sPEventoService;
 	private ModelMapper modelMapper = new ModelMapper();
 
 	
-	
 	@GetMapping("/")
 	public ModelAndView administracionSmartParking() {
-		ModelAndView mV = new ModelAndView(Rutas.administracionDispositivos);
-		
+		ModelAndView mV = new ModelAndView(ViewRouteHelper.administracionDispositivos);
+		mV.addObject("sparkingDispositivo", new SmartParkingModel());
+		mV.addObject("dispositivos", getAllDispositivos());
 		return mV;
 	}
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@GetMapping("/eventos/{id}")
 	public ModelAndView eventosDeDispositivo(@PathVariable("id") int id) {
-		ModelAndView mV = new ModelAndView(Rutas.visualizarEventosDeDispositivo);
-		User user = (org.springframework.security.core.userdetails.User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		mV.addObject("username", user.getUsername());
-
+		ModelAndView mV = new ModelAndView(ViewRouteHelper.visualizarEventosDeDispositivo);
+		mV.addObject("dispositivo", getDispostivo(id));
+		mV.addObject("eventos", sPEventoService.findByDispositivo(id));
 		return mV;
 	}
 	
 	
-	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@PostMapping("/")
-	public ResponseEntity crearSmartParking(@RequestBody SmartParkingDTO sp) {
-		
-		if(sp == null) return new ResponseEntity<String>("El objeto no puede ser nulo.", 
-				HttpStatus.BAD_REQUEST);
-		
-		Optional<SmartParking> aux = Optional.ofNullable(modelMapper.map(
-				smartParkService.findBynombreDispositivo(sp.getNombreDispositivo()), 
-				SmartParking.class)) ; 
-		
-		if(aux.isPresent()) return new ResponseEntity<String>("El objeto esta repetido.", 
-				HttpStatus.BAD_REQUEST);
-		try {
-			smartParkService.insertOrUpdate(sp);
-		} catch (Exception e) {
-			return new ResponseEntity<String>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
-		}
-		
-		return new ResponseEntity(sp, HttpStatus.CREATED);		
+	public RedirectView crearSmartParking(@ModelAttribute SmartParkingModel sp) {
+		smartParkService.insertOrUpdate(sp);
+		return new RedirectView(ViewRouteHelper.indiceDispositivos);
 	}
-	@SuppressWarnings("rawtypes")
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@PutMapping("/")
-	public ResponseEntity modificarSmartParking(@RequestBody SmartParkingDTO sp) {
-		Optional<SmartParking> aux = Optional.ofNullable(modelMapper.map(
-				smartParkService.findById(sp.getId()), 
-				SmartParking.class));
-		
-		if(aux.isEmpty()) return new ResponseEntity<String>("No existe ese dispositivo en la base de datos.", 
-				HttpStatus.BAD_REQUEST);
-		
-		try {
-			smartParkService.insertOrUpdate(sp);
-		} catch (Exception e) {
-			return new ResponseEntity<String>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
-		}
-		
-		return new ResponseEntity<SmartParkingDTO>(sp, HttpStatus.OK);
+	public RedirectView modificarSmartParking(@ModelAttribute SmartParkingModel sp) {
+		smartParkService.insertOrUpdate(sp);
+		return new RedirectView(ViewRouteHelper.indiceDispositivos);
 	}
-	@SuppressWarnings("rawtypes")
-	@PutMapping("/desactivar")
-	public ResponseEntity eliminarSmartParking(@RequestBody int id) {
-		if(id <= 0) return new ResponseEntity<String>(
-				"Error, ese ID es invalido",
-				HttpStatus.BAD_REQUEST);
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	@PutMapping("/desactivar")	
+	public RedirectView eliminarSmartParking(@ModelAttribute int id) {
+		Optional<SmartParkingModel> aux = smartParkService.findById(id);
 		
-		Optional<SmartParkingDTO> aux = smartParkService.findById(id); 
-		
-		if(aux.isEmpty()) return new ResponseEntity<String>(
-				"Esa entrada no existe en la Base de datos.", 
-				HttpStatus.NOT_FOUND);
+		//validaciones?
 		
 		aux.get().setEstadoDispositivo(false);
 		smartParkService.insertOrUpdate(aux.get());
-		return new ResponseEntity<String>("Entrada Desactivada.", HttpStatus.OK);
+		return new RedirectView(ViewRouteHelper.indiceDispositivos);
 	}
-	@SuppressWarnings("rawtypes")
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@PutMapping("/activar")
-	public ResponseEntity activarSmartParking(@RequestBody int id) {
-		if(id <= 0) return new ResponseEntity<String>(
-				"Error, ese ID es invalido",
-				HttpStatus.BAD_REQUEST);
+	public RedirectView activarSmartParking(@ModelAttribute int id) {
+		Optional<SmartParkingModel> aux = smartParkService.findById(id); 
 		
-		Optional<SmartParkingDTO> aux = smartParkService.findById(id); 
-		
-		if(aux.isEmpty()) return new ResponseEntity<String>(
-				"Esa entrada no existe en la Base de datos.", 
-				HttpStatus.NOT_FOUND);
+		//comprobaciones?
 		
 		aux.get().setEstadoDispositivo(true);
 		smartParkService.insertOrUpdate(aux.get());
-		return new ResponseEntity<String>("Entrada Reactivada.", HttpStatus.OK);
+		return new RedirectView(ViewRouteHelper.indiceDispositivos);
 	}
 	
-	@SuppressWarnings("rawtypes")
+
 	@GetMapping("/get/{id}")
-	public ResponseEntity getDispostivo(@PathVariable("id") int id) {
-		if(id < 0) return new ResponseEntity<String>(
-				"Error: id invalido.",
-				HttpStatus.BAD_REQUEST
-				);
-		
-		Optional<SmartParking> aux = Optional.ofNullable(modelMapper.map(
-				smartParkService.findById(id), 
-				SmartParking.class)); 
-		
-		if(aux.isEmpty()) return new ResponseEntity<String>(
-				"Error: no existe en la base de datos.",
-				HttpStatus.NOT_FOUND
-				);
-		
-		return new ResponseEntity<SmartParkingDTO>(
-				modelMapper.map(aux.get(), SmartParkingDTO.class),
-				HttpStatus.OK
-				);
+	public SmartParkingModel getDispostivo(@PathVariable("id") int id) {
+
+		Optional<SmartParkingModel> aux = smartParkService.findById(id); 
+		return aux.get();
 	}
-	@SuppressWarnings("rawtypes")
 	@GetMapping("/getAll")
-	public ResponseEntity getAllDispositivos() {
+	public List<SmartParkingModel> getAllDispositivos() {
 		
 		//muy posiblemente haya que aplicar el filtro aca
 		
-		List<SmartParkingDTO> aux = smartParkService.getAll().stream()
-				.map(SmartParking -> modelMapper.map(SmartParking, SmartParkingDTO.class))
+		List<SmartParkingModel> aux = smartParkService.getAll().stream()
+				.map(SmartParking -> modelMapper.map(SmartParking, SmartParkingModel.class))
 				.collect(Collectors.toList());
 		
-		
-		return new ResponseEntity<List<SmartParkingDTO>>(aux, HttpStatus.OK);
+		return aux;
 	}
 }

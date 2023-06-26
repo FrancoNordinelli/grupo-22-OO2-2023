@@ -9,11 +9,11 @@
 <body>
 	<div id="redondeo">
 		<legend>Form:</legend>
-		<form id="formularioDispositivos">
-			<input type="text" id="nombreDispositivo" placeholder="Nombre"></input>
-    	    <input type="text" id="descripcion" placeholder="Descripción"/></input>
-    	    <input type="text" id="codigoLugarEstacionamiento" placeholder="Codigo estacionamiento"/></input>
-			<input type="button" value="Agregar" id="boton" onclick="algo()"/>
+		<form action="#" th:action="@{/sparking/}" th:object="${sparkingDispositivo}" method="post">
+			<input type="text" th:field="*{nombreDispositivo}" placeholder="Nombre"></input>
+    	    <input type="text" th:field="*{descripcion}" placeholder="Descripción"/></input>
+    	    <input type="text" th:field="*{codigoLugarEstacionamiento}" placeholder="Codigo estacionamiento"/></input>
+			<input type="submit" placeholder="Agregar"/>
     	</form> 	
 	</div>
 		
@@ -28,13 +28,21 @@
 	        <th>Estado dispositivo</th>
 	        <th>Ocupado</th>
 	      </tr>
+	      <tr th:each="dispositivo : ${dispositivos}">
+			  <td><a th:href="@{/sparking/eventos/{id}(id=${dispositivo.id})}"><span th:text="*{dispositivo.id}"/></a></td>
+			  <td><span th:text="*{dispositivo.nombreDispositivo}"/></td>
+			  <td><span th:text="*{dispositivo.codigoLugarEstacionamiento}"/></td>
+			  <td><span th:text="*{dispositivo.descripcion}"/></td>
+			  <td><span th:text="*{dispositivo.estadoDispositivo}"/></td>
+			  <td><span th:text="*{dispositivo.ocupado}"/></td>
+		  </tr>
 	    </thead>
 	    <tbody id="listaDispostivos"></tbody>
 	  </table>
 	</div>
-	<script type="text/javascript" th:src="@{/js/objetos/objetos.js}"></script>
+	<!--<script type="text/javascript" th:src="@{/js/objetos/objetos.js}"></script>
 	<script type="text/javascript" th:src="@{/js/objetos/funciones.js}"></script>
 	<script type="text/javascript" th:src="@{/js/crearDispositivo.js}"></script>
-	<script type="text/javascript" th:src="@{/js/obtenerDispositivos.js}"></script>
+	<script type="text/javascript" th:src="@{/js/obtenerDispositivos.js}"></script>-->
 </body>
 </html>

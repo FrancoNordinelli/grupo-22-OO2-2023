@@ -23,7 +23,18 @@
 					<th>Fecha de creación</th>
 				</tr>
 			</thead>
-			<tbody id="tabla"></tbody>
+			<tbody id="tabla">
+				<tr>
+					<td><span th:text="${dispositivo.id}"/></td>
+					<td><span th:text="${dispositivo.nombreDispositivo}"/></td>
+					<td><span th:text="${dispositivo.codigoLugarEstacionamiento}"/></td>
+					<td><span th:text="${dispositivo.descripcion}"/></td>
+					<td><span th:text="${dispositivo.estadoDispositivo}"/></td>
+					<td><span th:text="${dispositivo.ocupado}"/></td>
+					<td><span th:text="${dispositivo.totalVecesOcupado}"/></td>
+					<td><span th:text="${dispositivo.createdAt}"/></td>
+				</tr>
+			</tbody>
 		</table>
 		
 		<!-- Aca va la administracion del dispositivo-->
@@ -62,9 +73,9 @@
 	<div class="urlVolver">
 		<a href="http://localhost:8080/sparking/">Volver</a>
 	</div>
-	<script type="text/javascript" th:src="@{/js/objetos/objetos.js}"></script>
+	<!--<script type="text/javascript" th:src="@{/js/objetos/objetos.js}"></script>
 	<script type="text/javascript" th:src="@{/js/objetos/funciones.js}"></script>
 	<script type="text/javascript" th:src="@{/js/obtenerDispositivo.js}"></script>
-	<script type="text/javascript" th:src="@{/js/administrarDispositivo.js}"></script>
+	<script type="text/javascript" th:src="@{/js/administrarDispositivo.js}"></script>-->
 </body>
 </html>

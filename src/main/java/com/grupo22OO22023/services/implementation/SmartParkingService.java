@@ -10,8 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import com.grupo22OO22023.dto.SmartParkingDTO;
 import com.grupo22OO22023.entities.SmartParking;
+import com.grupo22OO22023.models.SmartParkingModel;
 import com.grupo22OO22023.repositories.ISmartParkingRepository;
 import com.grupo22OO22023.services.ISmartParkingService;
 
@@ -23,10 +23,10 @@ public class SmartParkingService implements ISmartParkingService {
 	private ISmartParkingRepository smartParkingRepository;
 	
 	@Override
-	public SmartParkingDTO insertOrUpdate(SmartParkingDTO smartParking) {
+	public SmartParkingModel insertOrUpdate(SmartParkingModel smartParking) {
 		SmartParking sp = smartParkingRepository.save(modelMapper.map(
 				smartParking, SmartParking.class));
-		return modelMapper.map(sp, SmartParkingDTO.class);
+		return modelMapper.map(sp, SmartParkingModel.class);
 	}
 	@Override
 	public boolean remove(int id) {
@@ -40,52 +40,52 @@ public class SmartParkingService implements ISmartParkingService {
 	}
 
 	@Override
-	public Optional<SmartParkingDTO> findById(int id) {
+	public Optional<SmartParkingModel> findById(int id) {
 		return Optional.ofNullable(modelMapper.map(
 				smartParkingRepository.findById(id),
-				SmartParkingDTO.class));
+				SmartParkingModel.class));
 	}
 	@Override
-	public Optional<SmartParkingDTO> findBynombreDispositivo(String nombreDispositivo) {
+	public Optional<SmartParkingModel> findBynombreDispositivo(String nombreDispositivo) {
 		return Optional.ofNullable(modelMapper.map(
 				smartParkingRepository.findByNombreDispositivo(nombreDispositivo),
-				SmartParkingDTO.class));
+				SmartParkingModel.class));
 	}
 	@Override
-	public Optional<SmartParkingDTO> findByCodigoLugarEstacionamiento(String codigoLugarEstacionamiento) {	
+	public Optional<SmartParkingModel> findByCodigoLugarEstacionamiento(String codigoLugarEstacionamiento) {	
 		return Optional.ofNullable(modelMapper.map(
 				smartParkingRepository.findByCodigoLugarEstacionamiento(codigoLugarEstacionamiento),
-				SmartParkingDTO.class));
+				SmartParkingModel.class));
 	}
 
 	@Override
-	public List<SmartParkingDTO> getAll() {
+	public List<SmartParkingModel> getAll() {
 		return smartParkingRepository.findAll().stream()
-				.map(sp -> modelMapper.map(sp, SmartParkingDTO.class))
+				.map(sp -> modelMapper.map(sp, SmartParkingModel.class))
 				.collect(Collectors.toList());
 	}
 	@Override
-	public List<SmartParkingDTO> searchByOcupado(boolean ocupado) {
+	public List<SmartParkingModel> searchByOcupado(boolean ocupado) {
 		return smartParkingRepository.findByOcupado(ocupado).stream()
-				.map(sp -> modelMapper.map(sp, SmartParkingDTO.class))
+				.map(sp -> modelMapper.map(sp, SmartParkingModel.class))
 				.collect(Collectors.toList());
 	}
 	@Override
-	public List<SmartParkingDTO> searchByestadoDispositivo(boolean estadoDispositivo) {
+	public List<SmartParkingModel> searchByestadoDispositivo(boolean estadoDispositivo) {
 		return smartParkingRepository.findByestadoDispositivo(estadoDispositivo).stream()
-				.map(sp -> modelMapper.map(sp, SmartParkingDTO.class))
+				.map(sp -> modelMapper.map(sp, SmartParkingModel.class))
 				.collect(Collectors.toList());
 	}
 	@Override
-	public List<SmartParkingDTO> serchBycreatedAt(LocalDateTime createdAt) {
+	public List<SmartParkingModel> serchBycreatedAt(LocalDateTime createdAt) {
 		return smartParkingRepository.findBycreatedAt(createdAt).stream()
-				.map(sp -> modelMapper.map(sp, SmartParkingDTO.class))
+				.map(sp -> modelMapper.map(sp, SmartParkingModel.class))
 				.collect(Collectors.toList());
 	}
 	@Override
-	public List<SmartParkingDTO> serchByupdatedAt(LocalDateTime updatedAt) {
+	public List<SmartParkingModel> serchByupdatedAt(LocalDateTime updatedAt) {
 		return smartParkingRepository.findByupdatedAt(updatedAt).stream()
-				.map(sp -> modelMapper.map(sp, SmartParkingDTO.class))
+				.map(sp -> modelMapper.map(sp, SmartParkingModel.class))
 				.collect(Collectors.toList());
 	}
 

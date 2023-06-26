@@ -1,9 +1,12 @@
 package com.grupo22OO22023.controllers;
 
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.grupo22OO22023.helpers.ViewRouteHelper;
 
@@ -30,10 +33,10 @@ public class UserController {
 	}
 
 	@GetMapping("/loginsuccess")
-	public String loginCheck() {
-		
-		
-		
-		return ViewRouteHelper.INDEX;
-	}
+	public ModelAndView loginCheck() {
+		ModelAndView mV = new ModelAndView(ViewRouteHelper.INDEX);
+		User user = (org.springframework.security.core.userdetails.User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		mV.addObject("username", user.getUsername());
+		return mV;
+	} 
 }
