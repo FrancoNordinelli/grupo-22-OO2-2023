@@ -25,11 +25,11 @@
 			</thead>
 			<tbody id="tabla">
 				<tr>
-					<td><span th:text="${dispositivo.id}"/></td>
+					<td id="idDispositivo"><span th:text="${dispositivo.id}"/></td>
 					<td><span th:text="${dispositivo.nombreDispositivo}"/></td>
 					<td><span th:text="${dispositivo.codigoLugarEstacionamiento}"/></td>
 					<td><span th:text="${dispositivo.descripcion}"/></td>
-					<td><span th:text="${dispositivo.estadoDispositivo}"/></td>
+					<td id="estadoDispositivo"><span th:text="${dispositivo.estadoDispositivo}"/></td>
 					<td><span th:text="${dispositivo.ocupado}"/></td>
 					<td><span th:text="${dispositivo.totalVecesOcupado}"/></td>
 					<td><span th:text="${dispositivo.createdAt}"/></td>
@@ -37,21 +37,23 @@
 			</tbody>
 		</table>
 		
-		<!-- Aca va la administracion del dispositivo-->
-		
+		<!-- administracion del dispositivo -->
 		<div id="redondeo">
-			<form>
-				<input type="text" id="nombre" placeholder="Nombre dispositivo" required/>
-				<input type="text" id="descripcion" placeholder="Descripcion" required/>
-				Estado:<input type="radio" name="estado" value="true" checked="checked">Activado</input>
-				<input type="radio" name="estado" value="false">Desactivado</input>
-				
-			</form>
-      		<input type="button" value="Modificar" id="botonModificar"/>
+			<div>
+				<form id="formularioModificacion" th:action="@{/sparking/modificar}" 
+						th:object="${dispositivoAModificar}" method="post">
+					<input type="text" id="nombre" placeholder="Nombre dispositivo" th:field="*{nombreDispositivo}" required/>
+					<input type="text" id="descripcion" placeholder="Descripcion" th:field="*{descripcion}" required/>
+				</form>
+	      		<input type="button" value="Modificar" id="botonModificar"/>
+			</div>
+			<div>
+				<form id="formABDispostivo" action="#" th:action="@{/sparking/}" method="Post">
+					<input type="button" id="botonMultiple"/>
+				</form>
+			</div>
 		</div>
-		
 	</div>
-		
 	<div>
 		<table class="eventoTabla">
 			<thead>
@@ -73,9 +75,9 @@
 	<div class="urlVolver">
 		<a href="http://localhost:8080/sparking/">Volver</a>
 	</div>
-	<!--<script type="text/javascript" th:src="@{/js/objetos/objetos.js}"></script>
-	<script type="text/javascript" th:src="@{/js/objetos/funciones.js}"></script>
-	<script type="text/javascript" th:src="@{/js/obtenerDispositivo.js}"></script>
-	<script type="text/javascript" th:src="@{/js/administrarDispositivo.js}"></script>-->
+	<!--<script type="text/javascript" th:src="@{/js/objetos/objetos.js}"></script>-->
+	<!--<script type="text/javascript" th:src="@{/js/objetos/funciones.js}"></script>-->
+	<!--<script type="text/javascript" th:src="@{/js/obtenerDispositivo.js}"></script>-->
+	<script type="text/javascript" th:src="@{/js/administrarDispositivo.js}"></script>
 </body>
 </html>

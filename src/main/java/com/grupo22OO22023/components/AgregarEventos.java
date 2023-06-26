@@ -61,7 +61,8 @@ public class AgregarEventos {
 			
 			eventoService.insertOrUpdate(modelMapper.map(SPEvento, SPEventoModel.class));
 			smartParkService.insertOrUpdate(modelMapper.map(aux.get(), SmartParkingModel.class));
-			
+			System.out.println("dentro");
 		}
+		System.out.println("Fuera");
 	}
 }

@@ -1,115 +1,68 @@
+//-------------------------------------------------
+//Alta/Baja lógica de dispositivo
+//-------------------------------------------------
 
-/*
-function administrarDispostitivo(metodo, body, url){
-	fetch('http://localhost:8080/sparking/' + url, {
-		method: metodo,
-		body: JSON.stringify(body),
-		headers: {'Content-type': 'application/json; charset=UTF-8'}
-	}).then(function(respuesta){
-		console.log(respuesta);
-	}).catch((err) => console.log(err))
-}*/
+//Obtengo de forma general el ID
+const id = document.getElementById('idDispositivo').innerText;
 
+//Obtengo el HTML del boton que segun el etado del dispositivo va a cambiar su función
+const estadoDispositivo = document.getElementById('estadoDispositivo');
 
-function activarDispositivo(id){
-	putServer('http://localhost:8080/sparking/activar', id);
-	
-	//location.href='http://localhost:8080/sparking/';
+//Segun el estado del dispostivo, cambia el value del boton
+if(estadoDispositivo.innerText == 'true'){
+	document.getElementById('botonMultiple').value='Desactivar';
+} else {
+	document.getElementById('botonMultiple').value='Activar';
 }
-function desactivarDispositivo(id){
-	putServer('http://localhost:8080/sparking/desactivar', id);
-	
-	//location.href='http://localhost:8080/sparking/';
-}
-function modificarDispositivo(){
-	let id = document.getElementById('idDispositivo').innerText;	
-	let nombre = document.getElementById('nombre').value;
-	let descripcion = document.getElementById('descripcion').value;
-	
-	let estadoRadio = document.getElementsByName('estado');
-	let estado = true;
-	if(estadoRadio[1].checked) estado = estadoRadio[1].value;
-	
-	const dispositivo = new DispositivoModificacion(nombre, null, descripcion, id, estado);
-	putServer('http://localhost:8080/sparking/activar', dispositivo);
 
-	location.replace(location.href);
-}
+//Cambio del href del boton segun su estado y recarga de la pagina
+document.getElementById('botonMultiple').addEventListener('click', (evento) => {
 	
-obtenerDispositivo()
-document.addEventListener('DOMContentLoaded', () => {
-
-	const seccionDeBotonesAB = document.getElementById('redondeo');
-	const botonMultiple = document.createElement('input');
-	const campoNombre = document.getElementById('nombre');
-	const campoDescripcion = document.getElementById('descripcion');
-	const botonModificar = document.getElementById('botonModificar');
-	const estadoDispositivo = document.getElementById('estado');
+	const formularioAB = document.getElementById('formABDispostivo');
 	
-	console.log(estadoDispositivo);
-	
-	botonMultiple.id='botonMultiple';
-	botonMultiple.type='button';
-	if(estadoDispositivo.textContent){
-		botonMultiple.value='Desactivar';
-	} else {
-		botonMultiple.value='Activar';
+	switch(botonMultiple.value){
+		case 'Activar':
+			formularioAB.action = "/sparking/activar/" + id;
+			formularioAB.submit();			
+			break;
+		case 'Desactivar':
+			formularioAB.action = "/sparking/desactivar/" + id;
+			formularioAB.submit();
+			break;
+		default:
+			console.log('Error en el valor del boton multiple.');
 	}
-	
-	seccionDeBotonesAB.appendChild(botonMultiple)
-	
-	botonMultiple.addEventListener('click', () => {
-		switch(botonMultiple.value){
-			case 'Desactivar':
-				desactivarDispositivo(document.getElementById('idDispositvo'));
-				break;
-			case 'Activar':
-				activarDispositivo(document.getElementById('idDispositvo'));
-				break;
-			default:
-				console.log('Error en el valor del boton multiple.');
-		}
-	})
-	botonModificar.addEventListener('click', () => {
-		if(campoNombre.validity.valid){ 
-			if (campoDescripcion.validity.valid){
-				modificarDispositivo();
-				console.log('todo ok');
-			} else {
-				mostrarError();
-			}
-		} else {
-			mostrarError();
-		}
-		
-		function mostrarError(){
-			if(campoNombre.validity.valueMissing){
-				campoNombre.setCustomValidity('Error, el nombre es necesario.');
-				console.log('Error, el nombre es necesario.')
-			}
-			if(campoDescripcion.validity.valueMissing){
-				campoNombre.setCustomValidity('Error, la descripcion es necesaria.');
-				console.log('Error, la descripcion es necesaria.');
-			}
-		}
-	})
 })
 
+//-------------------------------------------------
+//modificacion de dispositivo
+//-------------------------------------------------
 
+//Obtengo los datos que se van a modificar, el boton de modificación y el formulario
+const campoNombre = document.getElementById('nombre');
+const campoDescripcion = document.getElementById('descripcion');
+const botonModificar = document.getElementById('botonModificar');
+const formularioModificacion = document.getElementById('formularioModificacion');
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+//Comprobación de los campos de modificación del dispositivo
+botonModificar.addEventListener('click', (evento) => {
+	
+	if(campoNombre.validity.valid && campoDescripcion.validity.valid){
+		formularioModificacion.action="/sparking/modificar/" + id;
+		formularioModificacion.submit();
+	} else {
+		mostrarError();
+	}
+	
+	function mostrarError(){
+		if(campoNombre.validity.valueMissing){
+			campoNombre.setCustomValidity('Error, el nombre es necesario.');
+			console.log('Error, el nombre es necesario.')
+		}
+		
+		if(campoDescripcion.validity.valueMissing){
+			campoNombre.setCustomValidity('Error, la descripcion es necesaria.');
+			console.log('Error, la descripcion es necesaria.');
+		}
+	}
+})

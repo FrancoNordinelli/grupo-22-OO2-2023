@@ -7,28 +7,19 @@ import java.util.stream.Collectors;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 
-import com.grupo22OO22023.entities.SmartParking;
 
 import com.grupo22OO22023.helpers.ViewRouteHelper;
 import com.grupo22OO22023.models.SmartParkingModel;
-import com.grupo22OO22023.repositories.ISPEventoRepository;
 import com.grupo22OO22023.services.ISPEventoService;
 import com.grupo22OO22023.services.ISmartParkingService;
 
@@ -44,6 +35,7 @@ public class SmartParkingController {
 	private ModelMapper modelMapper = new ModelMapper();
 
 	
+	
 	@GetMapping("/")
 	public ModelAndView administracionSmartParking() {
 		ModelAndView mV = new ModelAndView(ViewRouteHelper.administracionDispositivos);
@@ -57,9 +49,9 @@ public class SmartParkingController {
 		ModelAndView mV = new ModelAndView(ViewRouteHelper.visualizarEventosDeDispositivo);
 		mV.addObject("dispositivo", getDispostivo(id));
 		mV.addObject("eventos", sPEventoService.findByDispositivo(id));
+		mV.addObject("dispositivoAModificar", new SmartParkingModel());
 		return mV;
 	}
-	
 	
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@PostMapping("/")
@@ -68,25 +60,26 @@ public class SmartParkingController {
 		return new RedirectView(ViewRouteHelper.indiceDispositivos);
 	}
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
-	@PutMapping("/")
-	public RedirectView modificarSmartParking(@ModelAttribute SmartParkingModel sp) {
+	@PostMapping("/modificar/{id}")
+	public RedirectView modificarSmartParking(@PathVariable("id") int id, @ModelAttribute SmartParkingModel sp) {
+		sp.setId(id);
 		smartParkService.insertOrUpdate(sp);
 		return new RedirectView(ViewRouteHelper.indiceDispositivos);
 	}
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
-	@PutMapping("/desactivar")	
-	public RedirectView eliminarSmartParking(@ModelAttribute int id) {
+	@PostMapping("/desactivar/{id}")	
+	public RedirectView desactivarSmartParking(@PathVariable("id") int id) {
 		Optional<SmartParkingModel> aux = smartParkService.findById(id);
 		
 		//validaciones?
-		
+		//TODO arreglar esto
 		aux.get().setEstadoDispositivo(false);
 		smartParkService.insertOrUpdate(aux.get());
 		return new RedirectView(ViewRouteHelper.indiceDispositivos);
 	}
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
-	@PutMapping("/activar")
-	public RedirectView activarSmartParking(@ModelAttribute int id) {
+	@PostMapping("/activar/{id}")
+	public RedirectView activarSmartParking(@PathVariable("id") int id) {
 		Optional<SmartParkingModel> aux = smartParkService.findById(id); 
 		
 		//comprobaciones?
@@ -96,7 +89,6 @@ public class SmartParkingController {
 		return new RedirectView(ViewRouteHelper.indiceDispositivos);
 	}
 	
-
 	@GetMapping("/get/{id}")
 	public SmartParkingModel getDispostivo(@PathVariable("id") int id) {
 
