@@ -29,6 +29,6 @@ function postServer(URL, dispositivo){
 		headers: {"Content-type": "application/json; charset=UTF-8"}
 	})
 	.then(response => response.json())
-	.then(response => console.json(response))
+	.then(response => console.log(response))
 	.catch(err => console.log(err))
 }

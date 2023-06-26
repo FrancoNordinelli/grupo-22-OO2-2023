@@ -15,8 +15,8 @@ import org.springframework.stereotype.Component;
 import com.grupo22OO22023.dto.SmartParkingDTO;
 import com.grupo22OO22023.entities.Dispositivo;
 import com.grupo22OO22023.models.SPEventoModel;
-import com.grupo22OO22023.service.ISPEventoService;
-import com.grupo22OO22023.service.ISmartParkingService;
+import com.grupo22OO22023.services.ISPEventoService;
+import com.grupo22OO22023.services.ISmartParkingService;
 
 @Component
 public class AgregarEventos {

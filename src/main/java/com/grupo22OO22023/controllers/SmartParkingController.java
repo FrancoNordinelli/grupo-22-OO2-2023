@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,9 +25,10 @@ import com.grupo22OO22023.dto.SmartParkingDTO;
 import com.grupo22OO22023.entities.SmartParking;
 
 import com.grupo22OO22023.helpers.Rutas;
-import com.grupo22OO22023.service.ISmartParkingService;
+import com.grupo22OO22023.services.ISmartParkingService;
 
 @RestController
+@PreAuthorize("hasRole('ROLE_USER')")
 @RequestMapping("/sparking")
 public class SmartParkingController {
 	@Autowired

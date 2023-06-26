@@ -1,4 +1,4 @@
-package com.grupo22OO22023.service.implementation;
+package com.grupo22OO22023.services.implementation;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 import com.grupo22OO22023.dto.SmartParkingDTO;
 import com.grupo22OO22023.entities.SmartParking;
 import com.grupo22OO22023.repositories.ISmartParkingRepository;
-import com.grupo22OO22023.service.ISmartParkingService;
+import com.grupo22OO22023.services.ISmartParkingService;
 
 @Service("SmartParking")
 public class SmartParkingService implements ISmartParkingService {

@@ -1,4 +1,4 @@
-package com.grupo22OO22023.service;
+package com.grupo22OO22023.services;
 
 import java.time.LocalDateTime;
 import java.util.List;

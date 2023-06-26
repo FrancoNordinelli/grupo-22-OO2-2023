@@ -1,4 +1,4 @@
-package com.grupo22OO22023.service.implementation;
+package com.grupo22OO22023.services.implementation;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 import com.grupo22OO22023.entities.SPEvento;
 import com.grupo22OO22023.models.SPEventoModel;
 import com.grupo22OO22023.repositories.ISPEventoRepository;
-import com.grupo22OO22023.service.ISPEventoService;
+import com.grupo22OO22023.services.ISPEventoService;
 
 @Service("SPEvento")
 public class SPEventoService implements ISPEventoService {

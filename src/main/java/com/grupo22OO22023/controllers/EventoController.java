@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.grupo22OO22023.helpers.Rutas;
-import com.grupo22OO22023.service.ISPEventoService;
+import com.grupo22OO22023.services.ISPEventoService;
 
 @Controller
 @RequestMapping("/evento")
