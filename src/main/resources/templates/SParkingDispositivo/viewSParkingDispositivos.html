@@ -17,10 +17,10 @@
 			<input type="submit" placeholder="Agregar"/>
     	</form> 	
 	</div>
-	<div id="divFiltro">
+	<div class="divFiltro">
 		<legend>Filtro</legend>
-		<form id="filtroDispositivo">
-			<select name="Estado">
+		<form class="estiloFiltro">
+			<select name="Estado" id="filtroDispositivo">
 				<option selected="selected" value="true">Activado</option>
 				<option value="false">Desactiado</option>
 				<input type="button" value="Filtrar" id="botonFiltroEstado"/><br>
@@ -38,14 +38,16 @@
 	        <th>Estado dispositivo</th>
 	        <th>Ocupado</th>
 	      </tr>
-	      <tr th:each="dispositivo : ${dispositivos}">
-			  <td><a th:href="@{/sparking/eventos/{id}(id=${dispositivo.id})}"><span th:text="*{dispositivo.id}"/></a></td>
-			  <td><span th:text="*{dispositivo.nombreDispositivo}"/></td>
-			  <td><span th:text="*{dispositivo.codigoLugarEstacionamiento}"/></td>
-			  <td><span th:text="*{dispositivo.descripcion}"/></td>
-			  <td><span th:text="*{dispositivo.estadoDispositivo}"/></td>
-			  <td><span th:text="*{dispositivo.ocupado}"/></td>
+	    <tbody id="cuerpoDispositivos">
+		  <tr th:each="dispositivo : ${dispositivos}">
+		  	<td><a th:href="@{/sparking/eventos/{id}(id=${dispositivo.id})}"><span th:text="*{dispositivo.id}"/></a></td>
+		  	<td><span th:text="*{dispositivo.nombreDispositivo}"/></td>
+		  	<td><span th:text="*{dispositivo.codigoLugarEstacionamiento}"/></td>
+		  	<td><span th:text="*{dispositivo.descripcion}"/></td>
+		  	<td id="EstadoFiltroDispositivo"><span th:text="*{dispositivo.estadoDispositivo}"/></td>
+		  	<td><span th:text="*{dispositivo.ocupado}"/></td>
 		  </tr>
+	  </tbody>
 	    </thead>
 	    <tbody id="listaDispostivos"></tbody>
 	  </table>

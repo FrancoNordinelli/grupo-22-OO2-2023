@@ -1,4 +1,4 @@
-#divFiltro {
+.divFiltro {
 	border: 2px solid #645F4F;
 	border-radius: 3px;
 	background-color: #E5DCC3;
@@ -7,6 +7,6 @@
   	width: 40%;
 }
 
-#filtroDispositivo{
+.estiloFiltro{
 	text-align: center;
 }
