@@ -1,5 +1,7 @@
 package com.grupo22OO22023.controllers;
 
+import java.util.stream.Collectors;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -16,6 +18,8 @@ import com.grupo22OO22023.models.SensorHumedadModel;
 import com.grupo22OO22023.models.SmartParkingModel;
 import com.grupo22OO22023.services.ISHEventoService;
 import com.grupo22OO22023.services.ISensorHumedadService;
+
+import jakarta.validation.constraints.AssertFalse.List;
 
 @Controller
 @RequestMapping("/sensorHDispositivo")
@@ -34,22 +38,25 @@ public class SensorHumedadController {
 	public ModelAndView administracionSensoresHumedad() {
 		ModelAndView mV = new ModelAndView(ViewRouteHelper.SenshorH);
 		mV.addObject("shDispositivo", new SensorHumedadModel());
+		mV.addObject("sensores", getAll());
 		return mV;
 	}
 	
 	
+	private java.util.List<SensorHumedadModel> getAll() {
+		java.util.List<SensorHumedadModel>sensores = shService.getAll().stream()
+				.map(Sensores -> mp.map(Sensores,SensorHumedadModel.class)).collect(Collectors.toList());
+		return sensores;
+	}
+	
+
+
+
 	@PostMapping("/")
 	public RedirectView crearSensor(@ModelAttribute SensorHumedadModel sh) {
 		shService.insertOrUpdate(sh);
 		return new RedirectView(ViewRouteHelper.INDICESHUMEDAD);
 	}
 	
-//	@PostMapping("/")
-//	public ModelAndView crearSensorH(@ModelAttribute("shDispositivo") SensorHumedadModel sh) {
-//		ModelAndView mV = new ModelAndView();
-//		mV.setViewName(ViewRouteHelper.SenshorH);
-//		mV.addObject("shDispositivo", sh);
-//		return mV;
-//	}
 
 }

@@ -7,7 +7,7 @@
 <link rel="stylesheet" th:href="@{/css/redondeo.css}" />
 </head>
 <body>
-	<h1>PRUEBA</h1>
+
 
 
 	<div id="redondeo">
@@ -30,7 +30,16 @@
 				<th>Lectura</th>
 				<th>Estado</th>
 			</tr>
+			<tr th:each="dispositivo : ${sensores}">
+				<td><a
+					th:href="@{/sensorHDispositivo/eventos/{id}(id=${dispositivo.id})}"><span
+						th:text="*{dispositivo.id}" /></a></td>
+				<td><span th:text="*{dispositivo.nombreDispositivo}" /></td>
+				<td><span th:text="*{dispositivo.descripcion}" /></td>
+
+			</tr>
 		<thead>
+		<tbody id="listaDispostivos"></tbody>
 	</table>
 
 </body>

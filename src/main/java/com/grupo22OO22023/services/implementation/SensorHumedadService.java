@@ -1,5 +1,8 @@
 package com.grupo22OO22023.services.implementation;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -34,6 +37,12 @@ public class SensorHumedadService implements ISensorHumedadService {
 			System.out.println(e.toString());
 			return false;
 		}
+		
+	}
+
+	@Override
+	public List<SensorHumedadModel> getAll() {
+		return shRepository.findAll().stream().map(sensores -> mp.map(sensores, SensorHumedadModel.class)).collect(Collectors.toList());
 		
 	}
 
