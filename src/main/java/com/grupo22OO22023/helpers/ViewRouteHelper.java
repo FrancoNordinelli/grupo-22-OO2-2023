@@ -11,13 +11,13 @@ public class ViewRouteHelper {
 
 	/**** Redirects ****/
 	public final static String ROUTE = "/index";
-	public final static String indiceDispositivos = "/sparking/";
-	public final static String indiceEvento = "/evento/";
+	public final static String indiceSParking = "/sparking/";
+	public final static String indiceEventoSparking = "/evento/";
 	
 	//Vista dispositivos
-	public final static String administracionDispositivos = "dispositivos/viewDispositivos";
-	public final static String visualizarEventosDeDispositivo = "dispositivos/viewEventosDispositivo";
+	public final static String administracionSParking = "SParkingDispositivo/viewSParkingDispositivos";
+	public final static String visualizarEventosDeSParking = "SParkingDispositivo/viewEventosSParking";
 	
 	//vista eventos
-	public final static String visualizarEvento = "eventos/vistaEventos";
+	public final static String visualizarSParkingEvento = "SParkingEventos/vistaEventosSparking";
 }
