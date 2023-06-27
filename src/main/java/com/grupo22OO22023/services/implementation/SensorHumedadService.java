@@ -1,6 +1,7 @@
 package com.grupo22OO22023.services.implementation;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.grupo22OO22023.entities.SensorHumedad;
 import com.grupo22OO22023.models.SensorHumedadModel;
+import com.grupo22OO22023.models.SmartParkingModel;
 import com.grupo22OO22023.repositories.ISensorHumedadRepository;
 import com.grupo22OO22023.services.ISensorHumedadService;
 
@@ -44,6 +46,13 @@ public class SensorHumedadService implements ISensorHumedadService {
 	public List<SensorHumedadModel> getAll() {
 		return shRepository.findAll().stream().map(sensores -> mp.map(sensores, SensorHumedadModel.class)).collect(Collectors.toList());
 		
+	}
+
+	@Override
+	public Optional<SensorHumedadModel> findById(int id) {
+		return Optional.ofNullable(mp.map(
+				shRepository.findById(id),
+				SensorHumedadModel.class));
 	}
 
 }

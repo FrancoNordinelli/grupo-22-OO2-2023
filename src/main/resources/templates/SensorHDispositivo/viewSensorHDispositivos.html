@@ -20,6 +20,42 @@
 				type="submit" placeholder="Agregar" />
 		</form>
 	</div>
+
+	<div class="divFiltro">
+		<legend class="leyendaFiltro">Filtros</legend>
+
+
+
+		<!-- Filtro de estado dispositivo -->
+		<form class="estiloFiltro">
+			Estado dispositivo:<select name="Estado" id="filtroDispositivo">
+				<option selected="selected" value="todos">Todos</option>
+				<option value="true">Activado</option>
+				<option value="false">Desactiado</option>
+			</select> <input type="button" value="Filtrar" id="botonFiltroEstado" /><br>
+		</form>
+		<br>
+
+
+		<!-- Filtra por el valor de ocupado de un SParking -->
+		<form class="estiloFiltro">
+			Disponible:<select name="Ocupado" id="filtroSParkingOcupado">
+				<option selected="selected" value="todos">Todos</option>
+				<option value="true">Ocupado</option>
+				<option value="false">Desocupado</option>
+			</select> <input type="button" value="Filtrar" id="botonFiltroOcupado" /><br>
+		</form>
+		<br>
+
+
+		<!-- filtra por la descripcion del Dispositivo -->
+		<form class="estiloFiltro">
+			Descripcion: <input type="search" id="filtradoPorDescripcion"
+				placeholder="Descripcion" /> <input type="button" value="Filtrar"
+				id="botonFiltroDescripcion" /><br>
+		</form>
+
+	</div>
 	<table>
 		<thead>
 			<tr>

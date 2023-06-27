@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<head>
+<title>PRUEBA</title>
+</head>
+
+<script type="text/javascript" th:src="@{/js/administrarDispositivo.js}"></script>
+<body>
+<h1>PRUEBA</h1>
+</body>
+</html>
+
+<!-- <html xmlns:th="http://www.thymeleaf.org"> -->
+<!-- <head> -->
+<!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+<!-- <title>eventos de un dispositivo</title> -->
+<!-- <link rel="stylesheet" type="text/css" th:href="@{/css/dispositivo.css}" /> -->
+<!-- <link rel="stylesheet" type="text/css" th:href="@{/css/evento.css}" /> -->
+<!-- <link rel="stylesheet" type="text/css" th:href="@{/css/enlace.css}" /> -->
+<!-- <link rel="stylesheet" type="text/css" th:href="@{/css/redondeo.css}" /> -->
+<!-- </head> -->
+<!-- <body> -->
+<!-- 	<div> -->
+<!-- 		<table class="tablaDispositivo"> -->
+<!-- 			<thead> -->
+<!-- 				<tr> -->
+<!-- 					<th>ID</th> -->
+<!-- 					<th>Nombre dispositivo</th> -->
+<!-- 					<th>Codigo de Estacionamiento</th> -->
+<!-- 					<th>Descripción</th> -->
+<!-- 					<th>Estado dispositivo</th> -->
+<!-- 					<th>Fecha de creación</th> -->
+<!-- 				</tr> -->
+<!-- 			</thead> -->
+<!-- 			<tbody id="tabla"> -->
+<!-- 				<tr> -->
+<!-- 					<td id="idDispositivo"><span th:text="${dispositivo.id}" /></td> -->
+<!-- 					<td><span th:text="${dispositivo.nombreDispositivo}" /></td> -->
+<!-- 					<td><span th:text="${dispositivo.descripcion}" /></td> -->
+<!-- 					<td id="estadoDispositivo"><span -->
+<!-- 						th:text="${dispositivo.estadoDispositivo}" /></td> -->
+<!-- 					<td><span th:text="${dispositivo.createdAt}" /></td> -->
+<!-- 				</tr> -->
+<!-- 			</tbody> -->
+<!-- 		</table> -->
+
+<!-- 		<!-- administracion del dispositivo --> -->
+<!-- 		<div id="redondeo"> -->
+<!-- 			<div> -->
+<!-- 				<form id="formularioModificacion" th:action="@{/sensorHDispositivo/modificar}" -->
+<!-- 					th:object="${dispositivoAModificar}" method="post"> -->
+<!-- 					<input type="text" id="nombre" placeholder="Nombre dispositivo" -->
+<!-- 						th:field="*{nombreDispositivo}" required /> <input type="text" -->
+<!-- 						id="descripcion" placeholder="Descripcion" -->
+<!-- 						th:field="*{descripcion}" required /> -->
+<!-- 				</form> -->
+<!-- 				<input type="button" value="Modificar" id="botonModificar" /> -->
+<!-- 			</div> -->
+<!-- 			<div> -->
+<!-- 				<form id="formABDispostivo" action="#" th:action="@{/sensorHDispositivo/}" -->
+<!-- 					method="Post"> -->
+<!-- 					<input type="button" id="botonMultiple" /> -->
+<!-- 				</form> -->
+<!-- 			</div> -->
+<!-- 		</div> -->
+<!-- 	</div> -->
+<!-- 	<div> -->
+<!-- 		<table class="eventoTabla"> -->
+<!-- 			<thead> -->
+<!-- 				<tr> -->
+<!-- 					<th>ID</th> -->
+<!-- 					<th>nombre de evento</th> -->
+<!-- 					<th>creación</th> -->
+<!-- 				</tr> -->
+<!-- 			</thead> -->
+<!-- 			<tbody> -->
+<!-- 				<tr th:each="evento : ${eventos}"> -->
+<!-- 					<td><span th:text="${evento.idEvento}" /></td> -->
+<!-- 					<td><span th:text="${evento.nombreEvento}" /></td> -->
+<!-- 					<td><span th:text="${evento.createdAt}" /></td> -->
+<!-- 				</tr> -->
+<!-- 			</tbody> -->
+<!-- 		</table> -->
+<!-- 	</div> -->
+<!-- 	<div class="urlVolver"> -->
+<!-- 		<a href="http://localhost:8080/sparking/">Volver</a> -->
+<!-- 	</div> -->
+<!-- 	<!--<script type="text/javascript" th:src="@{/js/objetos/objetos.js}"></script>--> -->
+<!-- 	<!--<script type="text/javascript" th:src="@{/js/objetos/funciones.js}"></script>--> -->
+<!-- 	<!--<script type="text/javascript" th:src="@{/js/obtenerDispositivo.js}"></script>--> -->
+<!-- 	<script type="text/javascript" -->
+<!-- 		th:src="@{/js/administrarDispositivo.js}"></script> -->
+<!-- </body> -->
+<!-- </html> -->
