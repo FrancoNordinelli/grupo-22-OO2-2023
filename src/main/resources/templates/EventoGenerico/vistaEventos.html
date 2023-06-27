@@ -45,8 +45,7 @@
 
 		<tbody id="eventosParaFiltrar">
 			<tr th:each="evento : ${eventos}">
-				<td><a th:href="@{/evento/{id}(id=${evento.idEvento})}">
-					<span th:text="${evento.idEvento}"/></a></td>
+				<td><span th:text="${evento.idEvento}"/></td>
 				<td><span th:text="${evento.dispositivo.id}"/></td>
 				<td><span th:text="${evento.dispositivo.descripcion}"/></td>
 				<td><span th:text="${evento.nombreEvento}"/></td>
