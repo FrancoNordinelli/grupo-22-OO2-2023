@@ -94,13 +94,9 @@ public class SmartParkingController {
 	}
 	//@GetMapping("/getAll")
 	public List<SmartParkingModel> getAllDispositivos() {
-		
-		//muy posiblemente haya que aplicar el filtro aca
-		
 		List<SmartParkingModel> aux = smartParkService.getAll().stream()
 				.map(SmartParking -> modelMapper.map(SmartParking, SmartParkingModel.class))
 				.collect(Collectors.toList());
-		
 		return aux;
 	}
 }
