@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dispositivos almacenados</title>
+<link rel="stylesheet" th:href="@{/css/dispositivo.css}" />
+<link rel="stylesheet" th:href="@{/css/redondeo.css}" />
+</head>
+<body>
+	<h1>PRUEBA</h1>
+
+
+	<div id="redondeo">
+		<form action="#" th:action="@{/sensorHDispositivo/}"
+			th:object="${shDispositivo}" method="post">
+			<input type="text" th:field="*{nombreDispositivo}"
+				placeholder="Nombre"></input> <input type="text"
+				th:field="*{descripcion}" placeholder="Descripción" /></input> <input
+				type="text" th:field="*{ubicacion}" placeholder="Ubicacion" /></input> <input
+				type="submit" placeholder="Agregar" />
+		</form>
+	</div>
+	<table>
+		<thead>
+			<tr>
+				<th>ID</th>
+				<th>Nombre dispositivo</th>
+				<th>Sensor</th>
+				<th>Ubicacion</th>
+				<th>Lectura</th>
+				<th>Estado</th>
+			</tr>
+		<thead>
+	</table>
+
+</body>
+</html>
