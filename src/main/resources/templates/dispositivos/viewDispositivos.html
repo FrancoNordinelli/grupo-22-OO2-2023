@@ -5,10 +5,11 @@
 	<title>Dispositivos almacenados</title>
 	<link rel="stylesheet" th:href="@{/css/dispositivo.css}"/>
 	<link rel="stylesheet" th:href="@{/css/redondeo.css}"/>
+	<link rel="stylesheet" th:href="@{/css/filtro.css}"/>
 </head>
 <body>
 	<div id="redondeo">
-		<legend>Form:</legend>
+		<legend>Form</legend>
 		<form action="#" th:action="@{/sparking/}" th:object="${sparkingDispositivo}" method="post">
 			<input type="text" th:field="*{nombreDispositivo}" placeholder="Nombre"></input>
     	    <input type="text" th:field="*{descripcion}" placeholder="Descripción"/></input>
@@ -16,9 +17,18 @@
 			<input type="submit" placeholder="Agregar"/>
     	</form> 	
 	</div>
-		
+	<div id="divFiltro">
+		<legend>Filtro</legend>
+		<form id="filtroDispositivo">
+			<select name="Estado">
+				<option selected="selected" value="true">Activado</option>
+				<option value="false">Desactiado</option>
+				<input type="button" value="Filtrar" id="botonFiltroEstado"/><br>
+			</select>
+		</form>
+	</div>
 	<div>
-	  <table class="tablaDispositivo">
+	  <table class="tablaDispositivo" id="tablaDispositivos">
 	    <thead>	
 	      <tr>
 	        <th>ID</th>
@@ -44,5 +54,6 @@
 	<script type="text/javascript" th:src="@{/js/objetos/funciones.js}"></script>
 	<script type="text/javascript" th:src="@{/js/crearDispositivo.js}"></script>
 	<script type="text/javascript" th:src="@{/js/obtenerDispositivos.js}"></script>-->
+	<script type="text/javascript" th:src="@{/js/filtro.js}"></script>
 </body>
 </html>

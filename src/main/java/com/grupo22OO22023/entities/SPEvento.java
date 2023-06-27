@@ -17,11 +17,11 @@ public class SPEvento extends Evento{
 	@Column(name = "horasOcupado")
 	private long horasOcupado;
 
-	public SPEvento(String nombreEvento, SmartParking dispositivo, long horasOcupado) {
+	public SPEvento(String nombreEvento, Dispositivo dispositivo, long horasOcupado) {
 		super(nombreEvento, dispositivo);
 		this.horasOcupado = horasOcupado;
 	}
-	public SPEvento(LocalDateTime createdAt, SmartParking dispositivo) {
+	public SPEvento(LocalDateTime createdAt, Dispositivo dispositivo) {
 		super(createdAt, dispositivo);
 	}
 }
