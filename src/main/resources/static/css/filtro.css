@@ -7,6 +7,10 @@
   	width: 40%;
 }
 
-.estiloFiltro{
+.leyendaFiltro{
 	text-align: center;
+}
+
+.estiloFiltro{
+	text-align: left;
 }

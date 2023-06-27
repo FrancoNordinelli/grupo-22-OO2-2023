@@ -18,14 +18,36 @@
     	</form> 	
 	</div>
 	<div class="divFiltro">
-		<legend>Filtro</legend>
+		<legend class="leyendaFiltro">Filtros</legend>
+		
+		
+		
+		<!-- Filtro de estado dispositivo -->
 		<form class="estiloFiltro">
-			<select name="Estado" id="filtroDispositivo">
-				<option selected="selected" value="true">Activado</option>
+			Estado dispositivo:<select name="Estado" id="filtroDispositivo">
+				<option selected="selected" value="todos">Todos</option>
+				<option value="true">Activado</option>
 				<option value="false">Desactiado</option>
-				<input type="button" value="Filtrar" id="botonFiltroEstado"/><br>
 			</select>
+			<input type="button" value="Filtrar" id="botonFiltroEstado"/><br>
 		</form>
+		<br>
+		
+		
+		<!-- Filtra por el valor de ocupado de un SParking -->
+		<form class="estiloFiltro">
+			Disponible:<select name="Ocupado" id="filtroSParkingOcupado">
+				<option selected="selected" value="todos">Todos</option>
+				<option value="true">Ocupado</option>
+				<option value="false">Desocupado</option>
+			</select>
+			<input type="button" value="Filtrar" id="botonFiltroOcupado"/><br>
+		</form>
+		<br>
+		
+		
+		<!-- filtra por el nombre del Dispositivo -->
+		
 	</div>
 	<div>
 	  <table class="tablaDispositivo" id="tablaDispositivos">
@@ -53,10 +75,7 @@
 	    <tbody id="listaDispostivos"></tbody>
 	  </table>
 	</div>
-	<!--<script type="text/javascript" th:src="@{/js/objetos/objetos.js}"></script>
-	<script type="text/javascript" th:src="@{/js/objetos/funciones.js}"></script>
-	<script type="text/javascript" th:src="@{/js/crearDispositivo.js}"></script>
-	<script type="text/javascript" th:src="@{/js/obtenerDispositivos.js}"></script>-->
-	<script type="text/javascript" th:src="@{/js/filtro.js}"></script>
+	<script type="module" th:src="@{/js/filtros/filtroEstadoDispositivo.js}"></script>
+	<script type="module" th:src="@{/js/filtros/SParking/filtroOcupadoSParking.js}"></script>
 </body>
 </html>
