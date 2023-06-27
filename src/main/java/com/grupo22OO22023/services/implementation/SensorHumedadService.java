@@ -16,7 +16,7 @@ public class SensorHumedadService implements ISensorHumedadService {
 	private ModelMapper mp = new ModelMapper();
 	
 	@Autowired
-	@Qualifier("shRepository")
+	@Qualifier("sensorHumedadRepository")
 	private ISensorHumedadRepository shRepository;
 
 	@Override
