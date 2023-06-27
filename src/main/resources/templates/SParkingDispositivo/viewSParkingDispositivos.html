@@ -40,7 +40,8 @@
 	      </tr>
 	    <tbody id="cuerpoDispositivos">
 		  <tr th:each="dispositivo : ${dispositivos}">
-		  	<td><a th:href="@{/sparking/eventos/{id}(id=${dispositivo.id})}"><span th:text="*{dispositivo.id}"/></a></td>
+		  	<td><a th:href="@{/sparking/eventos/{id}(id=${dispositivo.id})}">
+				  <span th:text="*{dispositivo.id}"/></a></td>
 		  	<td><span th:text="*{dispositivo.nombreDispositivo}"/></td>
 		  	<td><span th:text="*{dispositivo.codigoLugarEstacionamiento}"/></td>
 		  	<td><span th:text="*{dispositivo.descripcion}"/></td>
