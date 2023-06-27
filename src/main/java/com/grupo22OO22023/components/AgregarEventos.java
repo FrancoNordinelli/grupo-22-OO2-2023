@@ -3,7 +3,6 @@ package com.grupo22OO22023.components;
 import static java.time.temporal.ChronoUnit.HOURS;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +11,6 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import com.grupo22OO22023.entities.Dispositivo;
-import com.grupo22OO22023.entities.SmartParking;
 import com.grupo22OO22023.models.SPEventoModel;
 import com.grupo22OO22023.models.SmartParkingModel;
 import com.grupo22OO22023.services.ISPEventoService;
