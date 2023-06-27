@@ -70,9 +70,6 @@ public class SmartParkingController {
 	@PostMapping("/desactivar/{id}")	
 	public RedirectView desactivarSmartParking(@PathVariable("id") int id) {
 		Optional<SmartParkingModel> aux = smartParkService.findById(id);
-		
-		//validaciones?
-		//TODO arreglar esto
 		aux.get().setEstadoDispositivo(false);
 		smartParkService.insertOrUpdate(aux.get());
 		return new RedirectView(ViewRouteHelper.indiceSParking);
