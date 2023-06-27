@@ -6,5 +6,6 @@ public interface ISHEventoService {
 	
 	public SHEventoModel insertOrUpdate(SHEventoModel shEventoModel);
 	public boolean remove(int id);
+	public SHEventoModel findByidEvento(int id);
 
 }
