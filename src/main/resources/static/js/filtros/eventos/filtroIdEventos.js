@@ -1,9 +1,9 @@
 //----->>>>>TODOS LOS FILTROS SE IMPORTAN COMO MODULOS PARA ENCAPSULAR LAS VARIABLES
 
-let tablaPAraFiltrar = 'cuerpoDispositivos';
-let formFiltro = 'filtradoPorDescripcion';
-let boton = 'botonFiltroDescripcion';
-const indiceColumnafiltro = 3;
+let tablaPAraFiltrar = 'eventosParaFiltrar';
+let formFiltro = 'idDispositivoFiltroDeEvento';
+let boton = 'botonIdDispositivoFiltroDeEvento';
+const indiceColumnafiltro = 1;
 
 //Recursos del HMTL
 const tablaDispositivo = document.getElementById(tablaPAraFiltrar);
@@ -14,7 +14,7 @@ botonFiltrado.addEventListener(('click'), () => {
 	for(let indiceFilas = 0; indiceFilas<tablaDispositivo.rows.length; indiceFilas++){
 		let filaDispositivo = tablaDispositivo.rows[indiceFilas];
 		
-		if(filtro.value == ''){
+		if(filtro.value == 0){
 			filaDispositivo.style.display='';
 		}else{
 			if(filaDispositivo.cells[indiceColumnafiltro].innerText == filtro.value){

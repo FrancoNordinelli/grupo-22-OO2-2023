@@ -1,9 +1,9 @@
 //----->>>>>TODOS LOS FILTROS SE IMPORTAN COMO MODULOS PARA ENCAPSULAR LAS VARIABLES
 
-let tablaPAraFiltrar = 'cuerpoDispositivos';
-let formFiltro = 'filtradoPorDescripcion';
-let boton = 'botonFiltroDescripcion';
-const indiceColumnafiltro = 3;
+let tablaPAraFiltrar = 'eventosParaFiltrar';
+let formFiltro = 'descipcionFiltroDeEvento';
+let boton = 'botondescipcionFiltroDeEvento';
+const indiceColumnafiltro = 2;
 
 //Recursos del HMTL
 const tablaDispositivo = document.getElementById(tablaPAraFiltrar);
