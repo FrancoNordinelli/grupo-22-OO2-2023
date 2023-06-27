@@ -32,4 +32,8 @@ public interface ISPEventoRepository extends JpaRepository<SPEvento, Serializabl
 
 	@Query("SELECT spe FROM SPEvento spe INNER JOIN FETCH spe.dispositivo d WHERE d.id = (:id) ORDER BY spe.idEvento desc")
 	public abstract List<SPEvento> findByIdDispositivoOrderedByIdDispositivoDESC(@Param("id") int id);
+	
+	@Query("SELECT COUNT(spe.idEvento) FROM SPEvento spe")
+	public abstract int cantEventos();
+	
 }

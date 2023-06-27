@@ -23,7 +23,7 @@ import lombok.Setter;
 @Getter @Setter
 @NoArgsConstructor 
 @Inheritance(strategy = InheritanceType.JOINED)
-public abstract class Evento {
+public class Evento {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idEvento;
@@ -32,21 +32,21 @@ public abstract class Evento {
 	@Column(name="instante", nullable = false)
 	@CreationTimestamp
 	private LocalDateTime createdAt;
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
 	@JoinColumn(name = "dispositivoID", nullable = false)
-	private SmartParking dispositivo;
+	private Dispositivo dispositivo;
 	
 
 	public Evento(String nombreEvento) {
 		super();
 		this.nombreEvento = nombreEvento;
 	}
-	public Evento(String nombreEvento, SmartParking dispositivo) {
+	public Evento(String nombreEvento, Dispositivo dispositivo) {
 		super();
 		this.nombreEvento = nombreEvento;
 		this.dispositivo = dispositivo;
 	}
-	public Evento(LocalDateTime createdAt, SmartParking dispositivo) {
+	public Evento(LocalDateTime createdAt, Dispositivo dispositivo) {
 		super();
 		this.createdAt = createdAt;
 		this.dispositivo = dispositivo;

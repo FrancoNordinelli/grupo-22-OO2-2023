@@ -21,4 +21,5 @@ public interface ISPEventoService {
 	public List<SPEventoModel> findByDispositivo(int idDispositivo);
 
 	public SPEventoModel findLastEventoByDispositivo(int id);
+	public int cantidadEventos();
 }

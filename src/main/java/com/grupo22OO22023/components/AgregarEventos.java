@@ -4,7 +4,6 @@ import static java.time.temporal.ChronoUnit.HOURS;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +12,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import com.grupo22OO22023.entities.Dispositivo;
+import com.grupo22OO22023.entities.SmartParking;
 import com.grupo22OO22023.models.SPEventoModel;
 import com.grupo22OO22023.models.SmartParkingModel;
 import com.grupo22OO22023.services.ISPEventoService;
@@ -30,39 +30,39 @@ public class AgregarEventos {
 
 	@Scheduled(fixedDelay=15000)
     public void runJob() throws Exception{
-		List<SmartParkingModel> listaDispo = smartParkService.getAll();
+		int cantSParking = smartParkService.countCantDispositivos();
+		int cantEvento = eventoService.cantidadEventos();
 		
-		if(listaDispo.size() > 0) {
+		if(cantSParking > 0) {
 			LocalDateTime fechaHora = LocalDateTime.now();
-			int idDispositivo = (int) Math.random()*listaDispo.size();
+			int idDispositivo = (int) Math.random()*cantSParking +1;
 			
-			Optional<SmartParkingModel> aux = Optional.ofNullable(listaDispo.get(idDispositivo));
+			 
+			SmartParkingModel aux = smartParkService.findById(idDispositivo).get();
+			SPEventoModel sPEvento = new SPEventoModel(fechaHora, modelMapper.map(aux, Dispositivo.class));
 			
-			if(aux.isEmpty()) throw new Exception("Error, el dispositivo no existe.");
-			if(!aux.get().isEstadoDispositivo()) throw new Exception("Error, ese dispositivo esta desactivado.");
-			
-			SPEventoModel SPEvento = new SPEventoModel(fechaHora, 
-					modelMapper.map(aux.get(), Dispositivo.class)); 
-			
-			if(aux.get().isOcupado()) {
-				SPEvento.setNombreEvento("Lugar estacionamiento " 
-						+ SPEvento.getDispositivo().getNombreDispositivo() 
-						+ " fue desocupado.");
+			if(aux.isOcupado()) {
 				
-				SPEvento.setHorasOcupado(HOURS.between(
-						eventoService.findLastEventoByDispositivo(aux.get().getId()).getCreatedAt(), 
-						LocalDateTime.now()));
+				aux.setOcupado(false);
+				sPEvento.setNombreEvento("Lugar estacionamiento " + sPEvento.getDispositivo().getNombreDispositivo() + " fue desocupado.");
+				
+				if(cantEvento>0) {
+					sPEvento.setHorasOcupado(HOURS.between(eventoService.findLastEventoByDispositivo(aux.getId()).getCreatedAt(), fechaHora));
+				}else {
+					sPEvento.setHorasOcupado(0);
+				}
+				
 			} else {
-				SPEvento.setNombreEvento("Lugar estacionamiento " 
-						+ SPEvento.getDispositivo().getNombreDispositivo() 
-						+ " fue ocupado.");
-				SPEvento.setHorasOcupado(0);
+				
+				aux.setOcupado(true);
+				sPEvento.setNombreEvento("Lugar estacionamiento " + sPEvento.getDispositivo().getNombreDispositivo() + " fue ocupado.");
+				sPEvento.setHorasOcupado(0);
+				
 			}
 			
-			eventoService.insertOrUpdate(modelMapper.map(SPEvento, SPEventoModel.class));
-			smartParkService.insertOrUpdate(modelMapper.map(aux.get(), SmartParkingModel.class));
-			System.out.println("dentro");
+			eventoService.insertOrUpdate(sPEvento);
+			smartParkService.insertOrUpdate(aux);
+			System.out.println("Existo");
 		}
-		System.out.println("Fuera");
 	}
 }

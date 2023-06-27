@@ -84,4 +84,7 @@ public class SPEventoService implements ISPEventoService {
 				findByIdDispositivoOrderedByIdDispositivoDESC(id).get(0), 
 				SPEventoModel.class);
 	}
+	public int cantidadEventos() {
+		return spEventoRepository.cantEventos();
+	}
 }

@@ -22,7 +22,7 @@ import lombok.Setter;
 @Getter @Setter @NoArgsConstructor
 @Table(name = "dispositivo") 
 @Inheritance(strategy = InheritanceType.JOINED)
-public abstract class Dispositivo{
+public class Dispositivo{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	protected int id;
