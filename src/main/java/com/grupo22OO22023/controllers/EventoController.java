@@ -5,7 +5,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -19,18 +18,11 @@ public class EventoController {
 	@Qualifier("EventoGenericoService")
 	private EventoGenericoService eventoService;
 	
-	@PreAuthorize("hasRole('ROLE_AUDITOR')")
+	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_AUDITOR')")
 	@GetMapping("/")
 	public ModelAndView eventos() {
 		ModelAndView mV = new ModelAndView(ViewRouteHelper.visualizarEventos);
-		mV.addObject("eventos", eventoService.getAll());
-		return mV;
-	}
-	@PreAuthorize("hasRole('ROLE_AUDITOR')")
-	@GetMapping("/{id}")
-	public ModelAndView eventoParticular(@PathVariable("id") int id) {
-		ModelAndView mV = new ModelAndView(ViewRouteHelper.visualizarEventoParticular);
-		mV.addObject("evento", eventoService.findByIdEventoAndInicializeDependencies(id));
+		mV.addObject("eventos", eventoService.findAllAndInicializeDependencies());
 		return mV;
 	}
 }

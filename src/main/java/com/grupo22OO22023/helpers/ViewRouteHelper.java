@@ -20,6 +20,5 @@ public class ViewRouteHelper {
 	
 	//vista eventos
 	public final static String visualizarEventos = "EventoGenerico/vistaEventos";
-	public final static String visualizarEventoParticular = "EventoGenerico/eventoParticular";
 	public final static String visualizarSParkingEvento = "SParkingEventos/vistaEventosSparking";
 }

@@ -18,4 +18,6 @@ public interface IEventoGenericoRepository extends JpaRepository<Evento, Seriali
 	
 	@Query("SELECT e FROM Evento e INNER JOIN FETCH e.dispositivo WHERE e.idEvento=(:id)")
 	public abstract Evento findByIdEventoAndInicializeDependencies(int id);
+	@Query("SELECT e FROM Evento e INNER JOIN FETCH e.dispositivo")
+	public abstract List<Evento> findAllAndInicializeDependencies();
 }

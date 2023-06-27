@@ -12,4 +12,5 @@ public interface IEventoGenericoService {
 	public abstract List<EventoModel> findByCreatedAt(LocalDateTime createdAt);
 	
 	public abstract EventoModel findByIdEventoAndInicializeDependencies(int id);
+	public abstract List<EventoModel> findAllAndInicializeDependencies();
 }

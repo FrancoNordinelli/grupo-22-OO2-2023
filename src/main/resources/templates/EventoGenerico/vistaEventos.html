@@ -10,9 +10,12 @@
 	<table class="eventoTabla">
 		<thead>
 			<tr>
-				<th>Id</th>
+				<th>ID Evento</th>
+				<th>ID dispositivo</th>
+				<th>Descripcion dispositivo</th>
 				<th>Nombre</th>
 				<th>Momento</th>
+				<th>Estado dispositivo</th>
 			</tr>
 		</thead>	
 
@@ -20,8 +23,11 @@
 			<tr th:each="evento : ${eventos}">
 				<td><a th:href="@{/evento/{id}(id=${evento.idEvento})}">
 					<span th:text="${evento.idEvento}"/></a></td>
+				<td><span th:text="${evento.dispositivo.id}"/></td>
+				<td><span th:text="${evento.dispositivo.descripcion}"/></td>
 				<td><span th:text="${evento.nombreEvento}"/></td>
 				<td><span th:text="${evento.createdAt}"/></td>
+				<td><span th:text="${evento.dispositivo.estadoDispositivo}"/></td>
 			</tr>
 		</tbody>
 	</table>

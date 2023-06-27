@@ -49,4 +49,11 @@ public class EventoGenericoService implements IEventoGenericoService{
 		return modelMapper.map(eventoGenericoRepository.findByIdEventoAndInicializeDependencies(id),
 				EventoModel.class);
 	}
+	@Override
+	public List<EventoModel> findAllAndInicializeDependencies() {
+		return eventoGenericoRepository.findAllAndInicializeDependencies()
+				.stream()
+				.map(evento -> modelMapper.map(evento, EventoModel.class))
+				.collect(Collectors.toList());
+	}
 }
