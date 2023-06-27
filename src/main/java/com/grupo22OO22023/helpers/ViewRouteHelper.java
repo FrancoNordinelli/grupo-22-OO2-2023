@@ -13,6 +13,8 @@ public class ViewRouteHelper {
 	public final static String ROUTE = "/index";
 	public final static String indiceSParking = "/sparking/";
 	public final static String indiceEventoSparking = "/evento/";
+	public final static String INDICESHUMEDAD = "/sensorHDispositivo/";
+	
 	
 	//Vista dispositivos
 	public final static String administracionSParking = "SParkingDispositivo/viewSParkingDispositivos";
@@ -20,4 +22,8 @@ public class ViewRouteHelper {
 	
 	//vista eventos
 	public final static String visualizarSParkingEvento  = "SParkingEventos/vistaEventosSparking";
+
+	public final static String SenshorH = "sensorHDispositivo/viewSensorHDispositivos";
+
+	
 }
