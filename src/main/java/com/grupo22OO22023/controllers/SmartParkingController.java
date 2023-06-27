@@ -86,13 +86,13 @@ public class SmartParkingController {
 		return new RedirectView(ViewRouteHelper.indiceSParking);
 	}
 	
-	@GetMapping("/get/{id}")
+	//@GetMapping("/get/{id}")
 	public SmartParkingModel getDispostivo(@PathVariable("id") int id) {
 
 		Optional<SmartParkingModel> aux = smartParkService.findById(id); 
 		return aux.get();
 	}
-	@GetMapping("/getAll")
+	//@GetMapping("/getAll")
 	public List<SmartParkingModel> getAllDispositivos() {
 		
 		//muy posiblemente haya que aplicar el filtro aca
