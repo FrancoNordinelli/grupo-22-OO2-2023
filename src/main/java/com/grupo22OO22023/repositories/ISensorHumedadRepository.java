@@ -7,7 +7,9 @@ import org.springframework.stereotype.Repository;
 
 import com.grupo22OO22023.entities.SensorHumedad;
 
-@Repository("senshorHumedadRepository")
+
+@Repository("sensorHumedadRepository")
+
 public interface ISensorHumedadRepository extends JpaRepository<SensorHumedad, Serializable> {
 	
 	public abstract SensorHumedad  findById(int id);
