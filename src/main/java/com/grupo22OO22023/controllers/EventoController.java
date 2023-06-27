@@ -2,6 +2,7 @@ package com.grupo22OO22023.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,12 +19,14 @@ public class EventoController {
 	@Qualifier("EventoGenericoService")
 	private EventoGenericoService eventoService;
 	
+	@PreAuthorize("hasRole('ROLE_AUDITOR')")
 	@GetMapping("/")
 	public ModelAndView eventos() {
 		ModelAndView mV = new ModelAndView(ViewRouteHelper.visualizarEventos);
 		mV.addObject("eventos", eventoService.getAll());
 		return mV;
 	}
+	@PreAuthorize("hasRole('ROLE_AUDITOR')")
 	@GetMapping("/{id}")
 	public ModelAndView eventoParticular(@PathVariable("id") int id) {
 		ModelAndView mV = new ModelAndView(ViewRouteHelper.visualizarEventoParticular);

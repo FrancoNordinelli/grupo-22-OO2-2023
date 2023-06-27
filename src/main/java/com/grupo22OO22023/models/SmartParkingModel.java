@@ -17,4 +17,8 @@ public class SmartParkingModel extends DispositivoModel{
 		this.codigoLugarEstacionamiento = codigoLugarEstacionamiento;
 		this.ocupado = false;
 	}
+
+	public void aumentarContadorOcupado() {
+		setTotalVecesOcupado(getTotalVecesOcupado()+1);
+	}
 }

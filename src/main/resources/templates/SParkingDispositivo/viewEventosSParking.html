@@ -45,10 +45,11 @@
 					<input type="text" id="nombre" placeholder="Nombre dispositivo" th:field="*{nombreDispositivo}" required/>
 					<input type="text" id="descripcion" placeholder="Descripcion" th:field="*{descripcion}" required/>
 				</form>
-	      		<input type="button" value="Modificar" id="botonModificar"/>
+	      		
 			</div>
 			<div>
 				<form id="formABDispostivo" action="#" th:action="@{/sparking/}" method="Post">
+					<input type="button" value="Modificar" id="botonModificar"/>
 					<input type="button" id="botonMultiple"/>
 				</form>
 			</div>
