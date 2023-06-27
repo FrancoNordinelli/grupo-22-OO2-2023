@@ -17,9 +17,7 @@ public class EventoController {
 	@Qualifier("SPEvento")
 	private ISPEventoService eventoService;
 	
-	@Autowired
-	@Qualifier("SHEvento")
-	private ISPEventoService eventoSH;
+	
 	
 	@GetMapping("/")
 	public ModelAndView eventos() {
