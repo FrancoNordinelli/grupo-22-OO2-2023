@@ -17,9 +17,11 @@ public class EventoController {
 	@Qualifier("SPEvento")
 	private ISPEventoService eventoService;
 	
+	
+	
 	@GetMapping("/")
 	public ModelAndView eventos() {
-		ModelAndView mV = new ModelAndView(ViewRouteHelper.visualizarEvento);
+		ModelAndView mV = new ModelAndView(ViewRouteHelper.visualizarSParkingEvento);
 		mV.addObject("eventos", eventoService.findAllEventosWithDependencies());
 		return mV;
 	}
