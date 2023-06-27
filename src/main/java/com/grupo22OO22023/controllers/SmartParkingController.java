@@ -38,7 +38,7 @@ public class SmartParkingController {
 	
 	@GetMapping("/")
 	public ModelAndView administracionSmartParking() {
-		ModelAndView mV = new ModelAndView(ViewRouteHelper.administracionDispositivos);
+		ModelAndView mV = new ModelAndView(ViewRouteHelper.administracionSParking);
 		mV.addObject("sparkingDispositivo", new SmartParkingModel());
 		mV.addObject("dispositivos", getAllDispositivos());
 		return mV;
@@ -57,14 +57,14 @@ public class SmartParkingController {
 	@PostMapping("/")
 	public RedirectView crearSmartParking(@ModelAttribute SmartParkingModel sp) {
 		smartParkService.insertOrUpdate(sp);
-		return new RedirectView(ViewRouteHelper.indiceDispositivos);
+		return new RedirectView(ViewRouteHelper.indiceSParking);
 	}
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@PostMapping("/modificar/{id}")
 	public RedirectView modificarSmartParking(@PathVariable("id") int id, @ModelAttribute SmartParkingModel sp) {
 		sp.setId(id);
 		smartParkService.insertOrUpdate(sp);
-		return new RedirectView(ViewRouteHelper.indiceDispositivos);
+		return new RedirectView(ViewRouteHelper.indiceSParking);
 	}
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@PostMapping("/desactivar/{id}")	
@@ -75,7 +75,7 @@ public class SmartParkingController {
 		//TODO arreglar esto
 		aux.get().setEstadoDispositivo(false);
 		smartParkService.insertOrUpdate(aux.get());
-		return new RedirectView(ViewRouteHelper.indiceDispositivos);
+		return new RedirectView(ViewRouteHelper.indiceSParking);
 	}
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@PostMapping("/activar/{id}")
@@ -86,7 +86,7 @@ public class SmartParkingController {
 		
 		aux.get().setEstadoDispositivo(true);
 		smartParkService.insertOrUpdate(aux.get());
-		return new RedirectView(ViewRouteHelper.indiceDispositivos);
+		return new RedirectView(ViewRouteHelper.indiceSParking);
 	}
 	
 	@GetMapping("/get/{id}")
