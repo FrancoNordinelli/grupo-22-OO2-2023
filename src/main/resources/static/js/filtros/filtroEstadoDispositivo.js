@@ -5,7 +5,6 @@ const tablaDispositivo = document.getElementById('cuerpoDispositivos');
 const filtro = document.getElementById('filtroDispositivo');
 const botonFiltrado = document.getElementById('botonFiltroEstado');
 
-console.log(tablaDispositivo.rows[0])
 const indiceColumnafiltro = 4;
 
 botonFiltrado.addEventListener(('click'), () => {

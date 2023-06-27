@@ -46,7 +46,12 @@
 		<br>
 		
 		
-		<!-- filtra por el nombre del Dispositivo -->
+		<!-- filtra por la descripcion del Dispositivo -->
+		<form class="estiloFiltro">
+			Descripcion:
+			<input type="search" id="filtradoPorDescripcion" placeholder="Descripcion"/>
+			<input type="button" value="Filtrar" id="botonFiltroDescripcion"/><br>
+		</form>
 		
 	</div>
 	<div>
@@ -77,5 +82,6 @@
 	</div>
 	<script type="module" th:src="@{/js/filtros/filtroEstadoDispositivo.js}"></script>
 	<script type="module" th:src="@{/js/filtros/SParking/filtroOcupadoSParking.js}"></script>
+	<script type="module" th:src="@{/js/filtros/filtroDescripcionDispositivo.js}"></script>
 </body>
 </html>
