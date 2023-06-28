@@ -21,12 +21,10 @@ import com.grupo22OO22023.models.SensorHumedadModel;
 import com.grupo22OO22023.services.ISHEventoService;
 import com.grupo22OO22023.services.ISensorHumedadService;
 
-
-
 @Controller
 @RequestMapping("/sensorHDispositivo")
 public class SensorHumedadController {
-	
+
 	@Autowired
 	@Qualifier("SensorHumedad")
 	private ISensorHumedadService shService;
@@ -34,8 +32,7 @@ public class SensorHumedadController {
 	@Qualifier("SHEvento")
 	private ISHEventoService shEvento;
 	private ModelMapper mp = new ModelMapper();
-	
-	
+
 	@GetMapping("/")
 	public ModelAndView administracionSensoresHumedad() {
 		ModelAndView mV = new ModelAndView(ViewRouteHelper.SenshorH);
@@ -43,22 +40,20 @@ public class SensorHumedadController {
 		mV.addObject("sensores", getAll());
 		return mV;
 	}
-	
-	
+
 	private java.util.List<SensorHumedadModel> getAll() {
-		java.util.List<SensorHumedadModel>sensores = shService.getAll().stream()
-				.map(Sensores -> mp.map(Sensores,SensorHumedadModel.class)).collect(Collectors.toList());
+		java.util.List<SensorHumedadModel> sensores = shService.getAll().stream()
+				.map(Sensores -> mp.map(Sensores, SensorHumedadModel.class)).collect(Collectors.toList());
 		return sensores;
 	}
-	
+
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@PostMapping("/")
 	public RedirectView crearSensor(@ModelAttribute SensorHumedadModel sh) {
 		shService.insertOrUpdate(sh);
 		return new RedirectView(ViewRouteHelper.INDICESHUMEDAD);
 	}
-	
-	
+
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@PostMapping("/modificar/{id}")
 	public RedirectView modificarSensorHumedad(@PathVariable("id") int id, @ModelAttribute SensorHumedadModel sh) {
@@ -66,7 +61,6 @@ public class SensorHumedadController {
 		shService.insertOrUpdate(sh);
 		return new RedirectView(ViewRouteHelper.INDICESHUMEDAD);
 	}
-
 
 	@GetMapping("/eventos/{id}")
 	public ModelAndView eventosDeSensor(@PathVariable("id") int id) {
@@ -76,14 +70,20 @@ public class SensorHumedadController {
 		mV.addObject("sensorCambio", new SensorHumedadModel());
 		return mV;
 	}
-	
-	
-	
-	public SensorHumedadModel getSensor(@PathVariable("id") int id) {
-		
-		Optional<SensorHumedadModel> sensor = shService.findById(id);
-		return  sensor.get();
+
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	@PostMapping("/activarDesactivar/{id}")
+	public RedirectView activarDesactivar(@PathVariable("id") int id) {
+		Optional<SensorHumedadModel> sh = shService.findById(id);
+		sh.get().setEstado(!sh.get().isEstado());
+		shService.insertOrUpdate(sh.get());
+
+		return new RedirectView(ViewRouteHelper.INDICESHUMEDAD);
 	}
-	
+
+	public SensorHumedadModel getSensor(@PathVariable("id") int id) {
+		Optional<SensorHumedadModel> sensor = shService.findById(id);
+		return sensor.get();
+	}
 
 }
