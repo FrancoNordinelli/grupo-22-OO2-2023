@@ -36,6 +36,9 @@ document.getElementById('botonMultiple').addEventListener('click', (evento) => {
 			default:
 				console.log('Error en el valor del boton multiple.');
 		}
+	} else{
+		formularioAB.action = "/sensorHDispositivo/activarDesactivar/" +id;
+		formularioAB.submit();
 	}
 })
 
