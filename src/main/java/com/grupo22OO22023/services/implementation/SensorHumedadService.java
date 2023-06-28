@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 
 import com.grupo22OO22023.entities.SensorHumedad;
 import com.grupo22OO22023.models.SensorHumedadModel;
-import com.grupo22OO22023.models.SmartParkingModel;
 import com.grupo22OO22023.repositories.ISensorHumedadRepository;
 import com.grupo22OO22023.services.ISensorHumedadService;
 

@@ -56,27 +56,36 @@
 		</form>
 
 	</div>
-	<table>
-		<thead>
-			<tr>
-				<th>ID</th>
-				<th>Nombre dispositivo</th>
-				<th>Sensor</th>
-				<th>Ubicacion</th>
-				<th>Lectura</th>
-				<th>Estado</th>
-			</tr>
-			<tr th:each="dispositivo : ${sensores}">
-				<td><a
-					th:href="@{/sensorHDispositivo/eventos/{id}(id=${dispositivo.id})}"><span
-						th:text="*{dispositivo.id}" /></a></td>
-				<td><span th:text="*{dispositivo.nombreDispositivo}" /></td>
-				<td><span th:text="*{dispositivo.descripcion}" /></td>
 
-			</tr>
-		<thead>
-		<tbody id="listaDispostivos"></tbody>
-	</table>
+	<div>
+		<table>
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>Nombre dispositivo</th>
+					<th>Sensor</th>
+					<th>Ubicacion</th>
+					<th>Lectura</th>
+					<th>Estado</th>
+				</tr>
+				<tr th:each="dispositivo : ${sensores}">
+					<td><a
+						th:href="@{/sensorHDispositivo/eventos/{id}(id=${dispositivo.id})}"><span
+							th:text="*{dispositivo.id}" /></a></td>
+					<td><span th:text="*{dispositivo.nombreDispositivo}" /></td>
+					<td><span th:text="*{dispositivo.descripcion}" /></td>
+
+				</tr>
+			<thead>
+			<tbody id="listaDispostivos"></tbody>
+		</table>
+	</div>
+	
+<!-- 	<script type="module" th:src="@{/js/filtros/filtroEstadoDispositivo.js}"></script> -->
+	
+	<!-- scripts para filtros de sensor humedad? -->
+<!-- 	<script type="module" th:src="@{/js/filtros/SParking/filtroOcupadoSParking.js}"></script> -->
+<!-- 	<script type="module" th:src="@{/js/filtros/filtroDescripcionDispositivo.js}"></script> -->
 
 </body>
 </html>

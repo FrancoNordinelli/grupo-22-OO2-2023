@@ -3,7 +3,7 @@ package com.grupo22OO22023.services;
 import java.util.List;
 import java.util.Optional;
 
-import com.grupo22OO22023.entities.SensorHumedad;
+
 import com.grupo22OO22023.models.SensorHumedadModel;
 
 public interface ISensorHumedadService {

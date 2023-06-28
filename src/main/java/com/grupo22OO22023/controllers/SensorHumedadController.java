@@ -18,11 +18,10 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import com.grupo22OO22023.helpers.ViewRouteHelper;
 import com.grupo22OO22023.models.SensorHumedadModel;
-import com.grupo22OO22023.models.SmartParkingModel;
 import com.grupo22OO22023.services.ISHEventoService;
 import com.grupo22OO22023.services.ISensorHumedadService;
 
-import jakarta.validation.constraints.AssertFalse.List;
+
 
 @Controller
 @RequestMapping("/sensorHDispositivo")
@@ -72,7 +71,7 @@ public class SensorHumedadController {
 	@GetMapping("/eventos/{id}")
 	public ModelAndView eventosDeSensor(@PathVariable("id") int id) {
 		ModelAndView mV = new ModelAndView(ViewRouteHelper.eventosSensor);
-		mV.addObject("sensores", getSensor(id));
+		mV.addObject("sensor", getSensor(id));
 		mV.addObject("eventos", shEvento.buscarPorIdDispositivo(id));
 		mV.addObject("sensorCambio", new SensorHumedadModel());
 		return mV;
@@ -80,8 +79,10 @@ public class SensorHumedadController {
 	
 	
 	
-	public Optional<SensorHumedadModel> getSensor(int id) {
-		return  shService.findById(id);
+	public SensorHumedadModel getSensor(@PathVariable("id") int id) {
+		
+		Optional<SensorHumedadModel> sensor = shService.findById(id);
+		return  sensor.get();
 	}
 	
 
