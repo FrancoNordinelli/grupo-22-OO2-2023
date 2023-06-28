@@ -46,7 +46,7 @@ public class SmartParkingController {
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@GetMapping("/eventos/{id}")
 	public ModelAndView eventosDeDispositivo(@PathVariable("id") int id) {
-		ModelAndView mV = new ModelAndView(ViewRouteHelper.visualizarEventosDeDispositivo);
+		ModelAndView mV = new ModelAndView(ViewRouteHelper.visualizarEventosDeSParking);
 		mV.addObject("dispositivo", getDispostivo(id));
 		mV.addObject("eventos", sPEventoService.findByDispositivo(id));
 		mV.addObject("dispositivoAModificar", new SmartParkingModel());
@@ -70,9 +70,6 @@ public class SmartParkingController {
 	@PostMapping("/desactivar/{id}")	
 	public RedirectView desactivarSmartParking(@PathVariable("id") int id) {
 		Optional<SmartParkingModel> aux = smartParkService.findById(id);
-		
-		//validaciones?
-		//TODO arreglar esto
 		aux.get().setEstadoDispositivo(false);
 		smartParkService.insertOrUpdate(aux.get());
 		return new RedirectView(ViewRouteHelper.indiceSParking);
@@ -89,21 +86,17 @@ public class SmartParkingController {
 		return new RedirectView(ViewRouteHelper.indiceSParking);
 	}
 	
-	@GetMapping("/get/{id}")
+	//@GetMapping("/get/{id}")
 	public SmartParkingModel getDispostivo(@PathVariable("id") int id) {
 
 		Optional<SmartParkingModel> aux = smartParkService.findById(id); 
 		return aux.get();
 	}
-	@GetMapping("/getAll")
+	//@GetMapping("/getAll")
 	public List<SmartParkingModel> getAllDispositivos() {
-		
-		//muy posiblemente haya que aplicar el filtro aca
-		
 		List<SmartParkingModel> aux = smartParkService.getAll().stream()
 				.map(SmartParking -> modelMapper.map(SmartParking, SmartParkingModel.class))
 				.collect(Collectors.toList());
-		
 		return aux;
 	}
 }

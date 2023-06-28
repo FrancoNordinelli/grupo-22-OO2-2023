@@ -10,7 +10,7 @@ import lombok.Setter;
 
 @Getter @Setter
 @NoArgsConstructor 
-public abstract class EventoModel {
+public class EventoModel {
 	private int idEvento;
 	private String nombreEvento;
 	private LocalDateTime createdAt; 

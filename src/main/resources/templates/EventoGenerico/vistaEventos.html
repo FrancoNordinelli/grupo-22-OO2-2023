@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Eventos de los dispositivos</title>
+	<link rel="stylesheet" type="text/css" th:href="@{/css/evento.css}"/>
+	<link rel="stylesheet" type="text/css" th:href="@{/css/redondeo.css}"/>
+	<link rel="stylesheet" type="text/css" th:href="@{/css/filtro.css}"/>
+</head>
+  
+<body>
+	<div id="redondeo">
+		<form class="estiloFiltro">
+			<!-- Filtrado por numero de dispositivo -->
+			ID dispositivo:<input id="idDispositivoFiltroDeEvento" type="number" placeholder="numero" min="0"/>
+			<input type="button" value="Filtrar" id="botonIdDispositivoFiltroDeEvento"/>
+		</form>
+		<form class="estiloFiltro">
+			<!-- filtrado por descripcion-->
+			Descripcion:<input id="descipcionFiltroDeEvento" type="search" placeholder="Descripcion"/>
+			<input type="button" value="Filtrar" id="botondescipcionFiltroDeEvento"/>
+		</form>
+		<form class="estiloFiltro">
+			<!-- filtrado por estado dispositivo-->
+			Estado dispositivo:<select id="estadoDispositivoFiltroDeEvento">
+				<option selected="selected" value="todos">Todos</option>
+				<option value="true">Activado</option>
+				<option value="false">Desactivado</option>
+			</select>
+			<input type="button" value="Filtrar" id="botonEstadoDispositivoFiltroDeEvento"/>
+		</form>
+	</div>
+	
+	<table class="eventoTabla">
+		<thead>
+			<tr>
+				<th>ID Evento</th>
+				<th>ID dispositivo</th>
+				<th>Descripcion dispositivo</th>
+				<th>Nombre</th>
+				<th>Momento</th>
+				<th>Estado dispositivo</th>
+			</tr>
+		</thead>	
+
+		<tbody id="eventosParaFiltrar">
+			<tr th:each="evento : ${eventos}">
+				<td><span th:text="${evento.idEvento}"/></td>
+				<td><span th:text="${evento.dispositivo.id}"/></td>
+				<td><span th:text="${evento.dispositivo.descripcion}"/></td>
+				<td><span th:text="${evento.nombreEvento}"/></td>
+				<td><span th:text="${evento.createdAt}"/></td>
+				<td><span th:text="${evento.dispositivo.estadoDispositivo}"/></td>
+			</tr>
+		</tbody>
+	</table>
+	<script type="module" th:src="@{/js/filtros/eventos/filtroIdEventos.js}"></script>
+	<script type="module" th:src="@{/js/filtros/eventos/filtroEstadoEventos.js}"></script>
+	<script type="module" th:src="@{/js/filtros/eventos/filtroDescripcionEventos.js}"></script>
+</body>
+</html>

@@ -1,0 +1,16 @@
+.divFiltro {
+	border: 2px solid #645F4F;
+	border-radius: 3px;
+	background-color: #E5DCC3;
+  	margin-left: auto;
+	margin-right: auto;
+  	width: 40%;
+}
+
+.leyendaFiltro{
+	text-align: center;
+}
+
+.estiloFiltro{
+	text-align: left;
+}

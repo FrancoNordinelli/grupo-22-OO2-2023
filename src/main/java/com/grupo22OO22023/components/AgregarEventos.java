@@ -33,15 +33,17 @@ public class AgregarEventos {
 		
 		if(cantSParking > 0) {
 			LocalDateTime fechaHora = LocalDateTime.now();
-			int idDispositivo = (int) Math.random()*cantSParking +1;
+			int idDispositivo = (int) (Math.random()*cantSParking) +1;
 			
-			 
+			System.out.println(idDispositivo);
+			
 			SmartParkingModel aux = smartParkService.findById(idDispositivo).get();
 			SPEventoModel sPEvento = new SPEventoModel(fechaHora, modelMapper.map(aux, Dispositivo.class));
 			
 			if(aux.isOcupado()) {
 				
 				aux.setOcupado(false);
+				aux.aumentarContadorOcupado();
 				sPEvento.setNombreEvento("Lugar estacionamiento " + sPEvento.getDispositivo().getNombreDispositivo() + " fue desocupado.");
 				
 				if(cantEvento>0) {

@@ -5,10 +5,13 @@
 	<title>Dispositivos almacenados</title>
 	<link rel="stylesheet" th:href="@{/css/dispositivo.css}"/>
 	<link rel="stylesheet" th:href="@{/css/redondeo.css}"/>
+
+	<link rel="stylesheet" th:href="@{/css/filtro.css}"/>
 </head>
 <body>
 	<div id="redondeo">
-		<legend>Form:</legend>
+		<legend>Form</legend>
+
 		<form action="#" th:action="@{/sparking/}" th:object="${sparkingDispositivo}" method="post">
 			<input type="text" th:field="*{nombreDispositivo}" placeholder="Nombre"></input>
     	    <input type="text" th:field="*{descripcion}" placeholder="Descripción"/></input>
@@ -16,9 +19,47 @@
 			<input type="submit" placeholder="Agregar"/>
     	</form> 	
 	</div>
+
+	<div class="divFiltro">
+		<legend class="leyendaFiltro">Filtros</legend>
 		
+		
+		
+		<!-- Filtro de estado dispositivo -->
+		<form class="estiloFiltro">
+			Estado dispositivo:<select name="Estado" id="filtroDispositivo">
+				<option selected="selected" value="todos">Todos</option>
+				<option value="true">Activado</option>
+				<option value="false">Desactiado</option>
+			</select>
+			<input type="button" value="Filtrar" id="botonFiltroEstado"/><br>
+		</form>
+		<br>
+		
+		
+		<!-- Filtra por el valor de ocupado de un SParking -->
+		<form class="estiloFiltro">
+			Disponible:<select name="Ocupado" id="filtroSParkingOcupado">
+				<option selected="selected" value="todos">Todos</option>
+				<option value="true">Ocupado</option>
+				<option value="false">Desocupado</option>
+			</select>
+			<input type="button" value="Filtrar" id="botonFiltroOcupado"/><br>
+		</form>
+		<br>
+		
+		
+		<!-- filtra por la descripcion del Dispositivo -->
+		<form class="estiloFiltro">
+			Descripcion:
+			<input type="search" id="filtradoPorDescripcion" placeholder="Descripcion"/>
+			<input type="button" value="Filtrar" id="botonFiltroDescripcion"/><br>
+		</form>
+		
+	</div>
 	<div>
-	  <table class="tablaDispositivo">
+	  <table class="tablaDispositivo" id="tablaDispositivos">
+
 	    <thead>	
 	      <tr>
 	        <th>ID</th>
@@ -28,21 +69,27 @@
 	        <th>Estado dispositivo</th>
 	        <th>Ocupado</th>
 	      </tr>
-	      <tr th:each="dispositivo : ${dispositivos}">
-			  <td><a th:href="@{/sparking/eventos/{id}(id=${dispositivo.id})}"><span th:text="*{dispositivo.id}"/></a></td>
-			  <td><span th:text="*{dispositivo.nombreDispositivo}"/></td>
-			  <td><span th:text="*{dispositivo.codigoLugarEstacionamiento}"/></td>
-			  <td><span th:text="*{dispositivo.descripcion}"/></td>
-			  <td><span th:text="*{dispositivo.estadoDispositivo}"/></td>
-			  <td><span th:text="*{dispositivo.ocupado}"/></td>
+
+	    <tbody id="cuerpoDispositivos">
+		  <tr th:each="dispositivo : ${dispositivos}">
+		  	<td><a th:href="@{/sparking/eventos/{id}(id=${dispositivo.id})}">
+				  <span th:text="*{dispositivo.id}"/></a></td>
+		  	<td><span th:text="*{dispositivo.nombreDispositivo}"/></td>
+		  	<td><span th:text="*{dispositivo.codigoLugarEstacionamiento}"/></td>
+		  	<td><span th:text="*{dispositivo.descripcion}"/></td>
+		  	<td id="EstadoFiltroDispositivo"><span th:text="*{dispositivo.estadoDispositivo}"/></td>
+		  	<td><span th:text="*{dispositivo.ocupado}"/></td>
 		  </tr>
+	  </tbody>
+
 	    </thead>
 	    <tbody id="listaDispostivos"></tbody>
 	  </table>
 	</div>
-	<!--<script type="text/javascript" th:src="@{/js/objetos/objetos.js}"></script>
-	<script type="text/javascript" th:src="@{/js/objetos/funciones.js}"></script>
-	<script type="text/javascript" th:src="@{/js/crearDispositivo.js}"></script>
-	<script type="text/javascript" th:src="@{/js/obtenerDispositivos.js}"></script>-->
+
+	<script type="module" th:src="@{/js/filtros/filtroEstadoDispositivo.js}"></script>
+	<script type="module" th:src="@{/js/filtros/SParking/filtroOcupadoSParking.js}"></script>
+	<script type="module" th:src="@{/js/filtros/filtroDescripcionDispositivo.js}"></script>
+
 </body>
 </html>

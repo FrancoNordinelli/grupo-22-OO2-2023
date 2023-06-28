@@ -9,7 +9,7 @@ import lombok.ToString;
 
 @Getter @Setter @ToString
 @NoArgsConstructor
-public abstract class DispositivoModel {
+public class DispositivoModel {
 	private int id;
 	private boolean estadoDispositivo;
 	private String nombreDispositivo;
