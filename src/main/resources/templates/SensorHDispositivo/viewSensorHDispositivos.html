@@ -27,25 +27,15 @@
 
 
 		<!-- Filtro de estado dispositivo -->
-		<form class="estiloFiltro">
-			Estado dispositivo:<select name="Estado" id="filtroDispositivo">
-				<option selected="selected" value="todos">Todos</option>
-				<option value="true">Activado</option>
-				<option value="false">Desactiado</option>
-			</select> <input type="button" value="Filtrar" id="botonFiltroEstado" /><br>
-		</form>
-		<br>
-
-
-		<!-- Filtra por el valor de ocupado de un SParking -->
-		<form class="estiloFiltro">
-			Disponible:<select name="Ocupado" id="filtroSParkingOcupado">
-				<option selected="selected" value="todos">Todos</option>
-				<option value="true">Ocupado</option>
-				<option value="false">Desocupado</option>
-			</select> <input type="button" value="Filtrar" id="botonFiltroOcupado" /><br>
-		</form>
-		<br>
+		<div id="filtro" data-dispositivo-tipo="sensor">
+			<form class="estiloFiltro">
+				Estado dispositivo:<select name="Estado" id="filtroDispositivo">
+					<option selected="selected" value="todos">Todos</option>
+					<option value="true">Activado</option>
+					<option value="false">Desactiado</option>
+				</select> <input type="button" value="Filtrar" id="botonFiltroEstado" /><br>
+			</form>
+		</div>
 
 
 		<!-- filtra por la descripcion del Dispositivo -->
@@ -65,27 +55,28 @@
 					<th>Nombre dispositivo</th>
 					<th>Sensor</th>
 					<th>Ubicacion</th>
-					<th>Lectura</th>
 					<th>Estado</th>
 				</tr>
+			<tbody id="cuerpoDispositivos">
 				<tr th:each="dispositivo : ${sensores}">
 					<td><a
 						th:href="@{/sensorHDispositivo/eventos/{id}(id=${dispositivo.id})}"><span
-							th:text="*{dispositivo.id}" /></a></td>
-					<td><span th:text="*{dispositivo.nombreDispositivo}" /></td>
-					<td><span th:text="*{dispositivo.descripcion}" /></td>
-
+							th:text="*{dispositivo.id}" /></span></a></td>
+					<td><span th:text="*{dispositivo.nombreDispositivo}" /></span></td>
+					<td><span th:text="*{dispositivo.descripcion}" /></span></td>
+					<td><span th:text="*{dispositivo.ubicacion}"></span>
+					<td><span th:text="*{dispositivo.estado}"></span>
 				</tr>
+			</tbody>
 			<thead>
 			<tbody id="listaDispostivos"></tbody>
 		</table>
 	</div>
-	
-<!-- 	<script type="module" th:src="@{/js/filtros/filtroEstadoDispositivo.js}"></script> -->
-	
-	<!-- scripts para filtros de sensor humedad? -->
-<!-- 	<script type="module" th:src="@{/js/filtros/SParking/filtroOcupadoSParking.js}"></script> -->
-<!-- 	<script type="module" th:src="@{/js/filtros/filtroDescripcionDispositivo.js}"></script> -->
+
+	<script type="module"
+		th:src="@{/js/filtros/filtroEstadoDispositivo.js}"></script>
+	<script type="module"
+		th:src="@{/js/filtros/filtroDescripcionDispositivo.js}"></script>
 
 </body>
 </html>

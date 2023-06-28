@@ -10,7 +10,7 @@
 </head>
 <body>
 	<div>
-		<table class="tablaDispositivo" data-dispositivo-tipo="sensor">
+		<table class="tablaDispositivo">
 			<thead>
 				<tr>
 					<th>ID</th>
@@ -20,7 +20,7 @@
 					<th>Fecha de creación</th>
 				</tr>
 			</thead>
-			<tbody id="tabla">
+			<tbody id="tabla" data-dispositivo-tipo="sensor">
 				<tr>
 					<td id="idDispositivo"><span th:text="${sensor.id}" /></td>
 					<td><span th:text="${sensor.nombreDispositivo}" /></td>
