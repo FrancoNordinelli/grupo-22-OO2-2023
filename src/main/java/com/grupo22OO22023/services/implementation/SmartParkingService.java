@@ -89,7 +89,7 @@ public class SmartParkingService implements ISmartParkingService {
 				.collect(Collectors.toList());
 	}
 
-	public int countCantDispositivos() {
-		return smartParkingRepository.countCantDispositivos();
-	}	
+	public List<Integer> findAllIdDispositivos(){
+		return  smartParkingRepository.findAllIdDispositivos();
+	}
 }
