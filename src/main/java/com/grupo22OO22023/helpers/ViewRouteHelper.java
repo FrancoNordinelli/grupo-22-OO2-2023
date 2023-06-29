@@ -27,8 +27,6 @@ public class ViewRouteHelper {
 	public final static String SenshorH = "sensorHDispositivo/viewSensorHDispositivos";
 
 	public final static String eventosSensor = "sensorHDispositivo/vistaEventosSH";
-
-	public final static String visualizarEventosDeSParking = "SParkingDispositivo/viewEventosSParking";
 	
 	//vista eventos
 	public final static String visualizarEventos = "EventoGenerico/vistaEventos";

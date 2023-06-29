@@ -21,6 +21,5 @@ public interface ISmartParkingService {
 	public List<SmartParkingModel> serchBycreatedAt(LocalDateTime createdAt);
 	public List<SmartParkingModel> serchByupdatedAt(LocalDateTime updatedAt);
 	
-	public int countCantDispositivos();
+	public List<Integer> findAllIdDispositivos();
 }
-

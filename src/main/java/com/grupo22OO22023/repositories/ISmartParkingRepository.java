@@ -24,6 +24,6 @@ public interface ISmartParkingRepository extends JpaRepository<SmartParking, Ser
 	public abstract List<SmartParking> findBycreatedAt(LocalDateTime createdAt);
 	public abstract List<SmartParking> findByupdatedAt(LocalDateTime updatedAt);
 	
-	@Query("SELECT COUNT(sp.id) FROM SmartParking sp")
-	public abstract int countCantDispositivos();
+	@Query("SELECT sp.id FROM SmartParking sp")
+	public abstract List<Integer> findAllIdDispositivos();
 }
