@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Dispositivos almacenados</title>
 	<link rel="stylesheet" th:href="@{/css/dispositivo.css}"/>
 	<link rel="stylesheet" th:href="@{/css/redondeo.css}"/>
@@ -27,7 +27,7 @@
 		
 		<!-- Filtro de estado dispositivo -->
 		<form class="estiloFiltro">
-			Estado dispositivo:<select name="Estado" id="filtroDispositivo">
+			Estado dispositivo:<select name="Estado" id="filtroEstadoDispositivo">
 				<option selected="selected" value="todos">Todos</option>
 				<option value="true">Activado</option>
 				<option value="false">Desactiado</option>

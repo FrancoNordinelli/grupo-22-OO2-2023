@@ -75,7 +75,7 @@ public class SensorHumedadController {
 	@PostMapping("/activarDesactivar/{id}")
 	public RedirectView activarDesactivar(@PathVariable("id") int id) {
 		Optional<SensorHumedadModel> sh = shService.findById(id);
-		sh.get().setEstado(!sh.get().isEstado());
+		sh.get().setEstadoDispositivo(!sh.get().isEstadoDispositivo());
 		shService.insertOrUpdate(sh.get());
 
 		return new RedirectView(ViewRouteHelper.INDICESHUMEDAD);

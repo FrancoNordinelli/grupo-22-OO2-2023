@@ -15,10 +15,8 @@ import com.grupo22OO22023.services.ISensorHumedadService;
 
 import jakarta.annotation.PostConstruct;
 
-@Component
-public class AgregarEventosSensor {
-
-	
+//@Component
+public class AgregarEventosSensor {	
 	//@Autowired
 	private ISensorHumedadRepository shr;
 	
@@ -26,20 +24,17 @@ public class AgregarEventosSensor {
 	@Qualifier("SensorHumedad")
 	private  ISHEventoService shI;
 	private final Scanner sc;
-	
-	
-	
+
 	public AgregarEventosSensor(ISensorHumedadRepository shr, ISHEventoService shI) {
 		this.shr = shr;
 		this.shI = shI;
 		this.sc = new Scanner(System.in);
 	}
 	
-	
 	//@PostConstruct garantiza que el método iniciar() se ejecute si shr no es null
 	@PostConstruct
     public void inicializar() {
-        SensorHumedad sensor = shr.findById(1);
+        SensorHumedad sensor = shr.findById(9);
         
         System.out.println("Nombre del evento: ");
         String nombreEvento = sc.nextLine();
@@ -47,13 +42,10 @@ public class AgregarEventosSensor {
         System.out.println("Regar? (true/false) :");
         boolean regar = sc.nextBoolean();
         //SHEventoModel nuevoEvento = new SHEventoModel(nombreEvento, sensor, regar);
-       
         
         SHEventoModel ev = new SHEventoModel(nombreEvento, LocalDateTime.now(), sensor, regar);
         System.out.println(sensor);
         
-        shI.insertOrUpdate(ev);
-        
+        shI.insertOrUpdate(ev); 
     }
-	
 }
