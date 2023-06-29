@@ -19,8 +19,7 @@ public class ViewRouteHelper {
 	
 	//Vista dispositivos
 	public final static String administracionSParking = "SParkingDispositivo/viewSParkingDispositivos";
-	public final static String visualizarEventosDeDispositivo = "SParkingDispositivo/viewEventosSParking";
-	
+	public final static String visualizarEventosDeSParking = "SParkingDispositivo/viewEventosSParking";
 	//vista eventos
 	public final static String visualizarSParkingEvento  = "SParkingEventos/vistaEventosSparking";
 
