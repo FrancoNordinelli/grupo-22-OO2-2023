@@ -3,7 +3,7 @@ package com.grupo22OO22023.controllers;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import org.springframework.beans.factory.annotation.Qualifier;
+
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
@@ -14,7 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.grupo22OO22023.components.AgregarEventosSensor;
 import com.grupo22OO22023.helpers.ViewRouteHelper;
-import com.grupo22OO22023.repositories.ISensorHumedadRepository;
+
 import com.grupo22OO22023.services.ISHEventoService;
 import com.grupo22OO22023.services.ISensorHumedadService;
 

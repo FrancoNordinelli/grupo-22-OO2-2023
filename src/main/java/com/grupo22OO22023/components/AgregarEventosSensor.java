@@ -5,22 +5,21 @@ import java.util.Optional;
 import java.util.Scanner;
 
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Component;
+
 
 import com.grupo22OO22023.entities.SensorHumedad;
 import com.grupo22OO22023.models.SHEventoModel;
 import com.grupo22OO22023.models.SensorHumedadModel;
-import com.grupo22OO22023.repositories.ISensorHumedadRepository;
+
 import com.grupo22OO22023.services.ISHEventoService;
 import com.grupo22OO22023.services.ISensorHumedadService;
 
-import jakarta.annotation.PostConstruct;
 
 public class AgregarEventosSensor implements Runnable {
 	
-	//private ISensorHumedadRepository shr;
+	
 	
 	@Qualifier("SensorHumedad")
 	private ISensorHumedadService shService;
