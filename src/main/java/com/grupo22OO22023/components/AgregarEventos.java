@@ -28,7 +28,7 @@ public class AgregarEventos {
 	private ISPEventoService eventoService;
 	private ModelMapper modelMapper = new ModelMapper();
 
-	@Scheduled(fixedDelay=15000)
+	@Scheduled(fixedDelay=7000)
     public void runJob() throws Exception{
 		List<Integer> cantSParking = smartParkService.findAllIdDispositivos();
 		int cantEvento = eventoService.cantidadEventos();
@@ -38,29 +38,29 @@ public class AgregarEventos {
 			int idDispositivo = (int) (Math.random()*cantSParking.size()) +1;
 			
 			Optional<SmartParkingModel> aux = smartParkService.findById(cantSParking.get(idDispositivo-1));
-			System.out.println(aux.isPresent());
-			if(aux.isPresent() && aux.get().getCodigoLugarEstacionamiento()!=null) {
-				SPEventoModel sPEvento = new SPEventoModel(fechaHora, modelMapper.map(aux.get(), Dispositivo.class));
-				if(aux.get().isOcupado()) {
-					aux.get().setOcupado(false);
-					aux.get().aumentarContadorOcupado();
-					sPEvento.setNombreEvento("Lugar estacionamiento " + 
-											sPEvento.getDispositivo().getNombreDispositivo() + 
-											" fue desocupado.");
-					
-					if(cantEvento>0) {
-						sPEvento.setHorasOcupado(HOURS.between(eventoService.findLastEventoByDispositivo(aux.get().getId()).getCreatedAt(), fechaHora));
-					}else {
-						sPEvento.setHorasOcupado(0);
+			if(aux.get().isEstadoDispositivo()) {
+				if(aux.isPresent() && aux.get().getCodigoLugarEstacionamiento()!=null) {
+					SPEventoModel sPEvento = new SPEventoModel(fechaHora, modelMapper.map(aux.get(), Dispositivo.class));
+					if(aux.get().isOcupado()) {
+						aux.get().setOcupado(false);
+						aux.get().aumentarContadorOcupado();
+						sPEvento.setNombreEvento("Lugar estacionamiento " + 
+												sPEvento.getDispositivo().getNombreDispositivo() + 
+												" fue desocupado.");
+						
+						if(cantEvento>0) {
+							sPEvento.setHorasOcupado(HOURS.between(eventoService.findLastEventoByDispositivo(aux.get().getId()).getCreatedAt(), fechaHora));
+						}else {
+							sPEvento.setHorasOcupado(0);
+						}
+					} else {
+						aux.get().setOcupado(true);
+						sPEvento.setNombreEvento("Lugar estacionamiento " + sPEvento.getDispositivo().getNombreDispositivo() + " fue ocupado.");
+						sPEvento.setHorasOcupado(0);	
 					}
-				} else {
-					aux.get().setOcupado(true);
-					sPEvento.setNombreEvento("Lugar estacionamiento " + sPEvento.getDispositivo().getNombreDispositivo() + " fue ocupado.");
-					sPEvento.setHorasOcupado(0);	
+					eventoService.insertOrUpdate(sPEvento);
+					smartParkService.insertOrUpdate(aux.get());
 				}
-				eventoService.insertOrUpdate(sPEvento);
-				smartParkService.insertOrUpdate(aux.get());
-				
 			}
 		}
 	}
