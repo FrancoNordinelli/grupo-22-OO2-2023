@@ -1,41 +1,38 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dispositivos almacenados</title>
-<link rel="stylesheet" th:href="@{/css/dispositivo.css}" />
-<link rel="stylesheet" th:href="@{/css/redondeo.css}" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Sensores almacenados</title>
+	<link rel="stylesheet" th:href="@{/css/dispositivo.css}" />
+	<link rel="stylesheet" th:href="@{/css/redondeo.css}" />
+	<link rel="stylesheet" th:href="@{/css/filtro.css}"/>
 </head>
 <body>
-
-
-
 	<div id="redondeo">
-		<form action="#" th:action="@{/sensorHDispositivo/}"
-			th:object="${shDispositivo}" method="post">
-			<input type="text" th:field="*{nombreDispositivo}"
-				placeholder="Nombre"></input> <input type="text"
-				th:field="*{descripcion}" placeholder="Descripción" /></input> <input
-				type="text" th:field="*{ubicacion}" placeholder="Ubicacion" /></input> <input
-				type="submit" placeholder="Agregar" />
+		<form action="#" th:action="@{/sensorHDispositivo/}" th:object="${shDispositivo}" method="post">
+			<input type="text" th:field="*{nombreDispositivo}" placeholder="Nombre"></input>
+			<input type="text" th:field="*{descripcion}" placeholder="Descripción" /></input>
+			<input type="text" th:field="*{ubicacion}" placeholder="Ubicacion" /></input>
+			<input type="submit" placeholder="Agregar" />
 		</form>
 	</div>
 
 	<div class="divFiltro">
 		<legend class="leyendaFiltro">Filtros</legend>
-
-
-
+		
 		<!-- Filtro de estado dispositivo -->
 		<div id="filtro" data-dispositivo-tipo="sensor">
 			<form class="estiloFiltro">
-				Estado dispositivo:<select name="Estado" id="filtroDispositivo">
+				Estado dispositivo:
+				<select name="Estado" id="filtroEstadoDispositivo">
 					<option selected="selected" value="todos">Todos</option>
 					<option value="true">Activado</option>
-					<option value="false">Desactiado</option>
-				</select> <input type="button" value="Filtrar" id="botonFiltroEstado" /><br>
+					<option value="false">Desactivado</option>
+				</select> 
+				<input type="button" value="Filtrar" id="botonFiltroEstado" /><br>
 			</form>
 		</div>
+
 
 
 		<!-- filtra por la descripcion del Dispositivo -->
@@ -45,10 +42,12 @@
 				id="botonFiltroDescripcion" /><br>
 		</form>
 
+
+
 	</div>
 
 	<div>
-		<table>
+		<table class="tablaDispositivo" id="tablaDispositivos">
 			<thead>
 				<tr>
 					<th>ID</th>
@@ -57,26 +56,20 @@
 					<th>Ubicacion</th>
 					<th>Estado</th>
 				</tr>
+			</thead>
 			<tbody id="cuerpoDispositivos">
 				<tr th:each="dispositivo : ${sensores}">
-					<td><a
-						th:href="@{/sensorHDispositivo/eventos/{id}(id=${dispositivo.id})}"><span
-							th:text="*{dispositivo.id}" /></span></a></td>
+					<td><a th:href="@{/sensorHDispositivo/eventos/{id}(id=${dispositivo.id})}">
+						<span th:text="*{dispositivo.id}"/></span></a></td>
 					<td><span th:text="*{dispositivo.nombreDispositivo}" /></span></td>
 					<td><span th:text="*{dispositivo.descripcion}" /></span></td>
 					<td><span th:text="*{dispositivo.ubicacion}"></span>
-					<td><span th:text="*{dispositivo.estado}"></span>
+					<td><span th:text="*{dispositivo.estadoDispositivo}"></span>
 				</tr>
 			</tbody>
-			<thead>
-			<tbody id="listaDispostivos"></tbody>
 		</table>
 	</div>
 
-	<script type="module"
-		th:src="@{/js/filtros/filtroEstadoDispositivo.js}"></script>
-	<script type="module"
-		th:src="@{/js/filtros/filtroDescripcionDispositivo.js}"></script>
-
+	<script type="module" th:src="@{/js/filtros/filtroEstadoDispositivo.js}"></script>
 </body>
 </html>

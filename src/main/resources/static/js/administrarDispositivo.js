@@ -19,7 +19,7 @@ if (estadoDispositivo.innerText == 'true') {
 }
 
 //Cambio del href del boton segun su estado y recarga de la pagina
-document.getElementById('botonMultiple').addEventListener('click', (evento) => {
+document.getElementById('botonMultiple').addEventListener('click', () => {
 
 	const formularioAB = document.getElementById('formABDispostivo');
 
