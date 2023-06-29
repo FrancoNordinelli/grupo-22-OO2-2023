@@ -26,4 +26,13 @@ public class EventoModel {
 		this.createdAt = createdAt;
 		this.dispositivo = dispositivo;
 	}
+	public EventoModel(String nombreEvento, LocalDateTime createdAt, Dispositivo dispositivo) {
+		super();
+		this.nombreEvento = nombreEvento;
+		this.createdAt = createdAt;
+		this.dispositivo = dispositivo;
+	}
+	
+	
+	
 }

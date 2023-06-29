@@ -50,4 +50,14 @@ public class Dispositivo{
 		this.estadoDispositivo = estadoDispositivo;
 		this.descripcion = descripcion;
 	}
+
+
+	@Override
+	public String toString() {
+		return "Dispositivo [id=" + id + ", nombreDispositivo=" + nombreDispositivo + ", estadoDispositivo="
+				+ estadoDispositivo + ", descripcion=" + descripcion + ", updatedAt=" + updatedAt + ", createdAt="
+				+ createdAt + "]";
+	}
+	
+	
 }

@@ -4,17 +4,15 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
-import org.modelmapper.internal.bytebuddy.asm.Advice.Return;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.grupo22OO22023.entities.SHEvento;
-import com.grupo22OO22023.entities.SPEvento;
-import com.grupo22OO22023.entities.SensorHumedad;
+
 import com.grupo22OO22023.models.SHEventoModel;
-import com.grupo22OO22023.models.SPEventoModel;
-import com.grupo22OO22023.models.SensorHumedadModel;
+
 import com.grupo22OO22023.repositories.ISHEventoRepository;
 import com.grupo22OO22023.services.ISHEventoService;
 

@@ -1,5 +1,6 @@
 package com.grupo22OO22023.config;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
@@ -26,17 +27,6 @@ public class SecurityConfiguration {
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
 		auth.userDetailsService(userService).passwordEncoder(new BCryptPasswordEncoder());
 	}
-
-//	@Bean
-//	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-//		http.authorizeHttpRequests().requestMatchers("/css/*", "/images/*", "/js/*", "/webfonts/*", "/vendor/*", "/resources/**", "/templates/**").permitAll()
-//				.anyRequest().authenticated().and()
-//				.formLogin(login -> login.loginPage("/login").loginProcessingUrl("/loginprocess")
-//						.usernameParameter("username").passwordParameter("password").defaultSuccessUrl("/loginsuccess")
-//						.permitAll())
-//				.logout(logout -> logout.logoutUrl("/logout").logoutSuccessUrl("/logout").permitAll());
-//		return http.build();
-//	}
 	
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -59,6 +49,11 @@ public class SecurityConfiguration {
 	    
 	    return http.build();
 	}
+	
+	 @Bean
+	    public ModelMapper modelMapper() {
+	        return new ModelMapper();
+	    }
 
 
 }

@@ -30,6 +30,11 @@ public class SensorHumedad extends Dispositivo {
 		this.estado = estado;
 		this.sensor = sensor;
 	}
+	@Override
+	public String toString() {
+		return "SensorHumedad [ubicacion=" + ubicacion + ", lectura=" + lectura + ", estado=" + estado + ", sensor="
+				+ sensor + "]" + super.toString();
+	}
 	
 	
 	
