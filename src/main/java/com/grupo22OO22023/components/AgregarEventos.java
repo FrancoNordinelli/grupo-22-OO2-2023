@@ -38,7 +38,7 @@ public class AgregarEventos {
 			int idDispositivo = (int) (Math.random()*cantSParking.size()) +1;
 			
 			Optional<SmartParkingModel> aux = smartParkService.findById(cantSParking.get(idDispositivo-1));
-			System.out.println(aux.isPresent());
+
 			if(aux.isPresent() && aux.get().getCodigoLugarEstacionamiento()!=null) {
 				SPEventoModel sPEvento = new SPEventoModel(fechaHora, modelMapper.map(aux.get(), Dispositivo.class));
 				if(aux.get().isOcupado()) {
@@ -60,7 +60,6 @@ public class AgregarEventos {
 				}
 				eventoService.insertOrUpdate(sPEvento);
 				smartParkService.insertOrUpdate(aux.get());
-				
 			}
 		}
 	}

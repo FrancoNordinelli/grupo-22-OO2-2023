@@ -85,14 +85,12 @@ public class SmartParkingController {
 		smartParkService.insertOrUpdate(aux.get());
 		return new RedirectView(ViewRouteHelper.indiceSParking);
 	}
-	
-	//@GetMapping("/get/{id}")
+		
 	public SmartParkingModel getDispostivo(@PathVariable("id") int id) {
 
 		Optional<SmartParkingModel> aux = smartParkService.findById(id); 
 		return aux.get();
 	}
-	//@GetMapping("/getAll")
 	public List<SmartParkingModel> getAllDispositivos() {
 		List<SmartParkingModel> aux = smartParkService.getAll().stream()
 				.map(SmartParking -> modelMapper.map(SmartParking, SmartParkingModel.class))
