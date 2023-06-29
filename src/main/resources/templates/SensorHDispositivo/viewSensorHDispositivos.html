@@ -6,6 +6,7 @@
 	<link rel="stylesheet" th:href="@{/css/dispositivo.css}" />
 	<link rel="stylesheet" th:href="@{/css/redondeo.css}" />
 	<link rel="stylesheet" th:href="@{/css/filtro.css}"/>
+	<link rel="stylesheet" type="text/css" th:href="@{/css/enlace.css}" />
 </head>
 <body>
 	<div id="redondeo">
@@ -57,7 +58,10 @@
 			</tbody>
 		</table>
 	</div>
-
+	<div class="urlVolver">
+		<a href="http://localhost:8080/loginsuccess">Volver</a>
+	</div>
+	
 	<script type="module" th:src="@{/js/filtros/filtroEstadoDispositivo.js}"></script>
 </body>
 </html>

@@ -5,7 +5,7 @@
 	<title>Dispositivos almacenados</title>
 	<link rel="stylesheet" th:href="@{/css/dispositivo.css}"/>
 	<link rel="stylesheet" th:href="@{/css/redondeo.css}"/>
-
+	<link rel="stylesheet" type="text/css" th:href="@{/css/enlace.css}" />
 	<link rel="stylesheet" th:href="@{/css/filtro.css}"/>
 </head>
 <body>
@@ -85,6 +85,10 @@
 	    </thead>
 	    <tbody id="listaDispostivos"></tbody>
 	  </table>
+	</div>
+	
+	<div class="urlVolver">
+		<a href="http://localhost:8080/loginsuccess">Volver</a>
 	</div>
 
 	<script type="module" th:src="@{/js/filtros/filtroEstadoDispositivo.js}"></script>
